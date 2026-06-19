@@ -21,8 +21,20 @@
             width: 380px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
-        h1 { text-align: center; color: #ffd700; margin-bottom: 5px; }
-        .sub { text-align: center; color: #c0a060; margin-bottom: 25px; font-size: 14px; }
+        h1 { 
+            text-align: center; 
+            color: #ffd700; 
+            margin-bottom: 5px; 
+            font-size: 28px;
+        }
+        .sub { 
+            text-align: center; 
+            color: #c0a060; 
+            margin-bottom: 25px; 
+            font-size: 14px; 
+            border-bottom: 1px solid #3a2a1a;
+            padding-bottom: 15px;
+        }
         .tab { display: flex; margin-bottom: 20px; }
         .tab button { 
             flex: 1; padding: 10px; background: #3a2218; border: none; 
@@ -48,12 +60,20 @@
         .msg { text-align: center; margin-top: 15px; font-size: 14px; min-height: 20px; }
         .msg.success { color: #7bed9f; }
         .msg.error { color: #ff6b6b; }
+        .version {
+            text-align: center;
+            color: #5a4a3a;
+            font-size: 11px;
+            margin-top: 20px;
+            border-top: 1px solid #2a1a12;
+            padding-top: 12px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>⚔️ 群雄割据</h1>
-    <div class="sub">十二路诸侯 · 逐鹿中原</div>
+    <h1>🏰 饭醉团伙</h1>
+    <div class="sub">是兄弟就来砍我</div>
     
     <div class="tab">
         <button id="tabLogin" class="active" onclick="switchTab('login')">登录</button>
@@ -63,7 +83,7 @@
     <div id="loginForm">
         <div class="form-group"><label>账号</label><input id="loginUser" placeholder="输入用户名"></div>
         <div class="form-group"><label>密码</label><input id="loginPass" type="password" placeholder="输入密码"></div>
-        <button class="btn" onclick="handleLogin()">进入大营</button>
+        <button class="btn" onclick="handleLogin()">入主大营</button>
     </div>
 
     <div id="registerForm" style="display:none;">
@@ -74,6 +94,7 @@
     </div>
 
     <div id="message" class="msg"></div>
+    <div class="version">v2.0 · 饭醉团伙出品</div>
 </div>
 
 <script>

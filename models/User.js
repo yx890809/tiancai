@@ -32,12 +32,24 @@ class User {
         this.username = username;
         this.password = password;
         this.tribeName = tribeName || `${username}的部落`;
-        this.resources = { food: 500, wood: 300, iron: 100 };
-        this.buildings = { mainCastle: 1, farm: 1, barracks: 0 };
-        this.army = { infantry: 0, cavalry: 0, archer: 0 };
+        this.resources = {
+            food: 500,
+            wood: 300,
+            iron: 100
+        };
+        this.buildings = {
+            mainCastle: 1,
+            farm: 1,
+            barracks: 0
+        };
+        this.army = {
+            infantry: 0,
+            cavalry: 0,
+            archer: 0
+        };
         this.allies = [];
         
-        // 随机分配武将
+        // 随机武将
         const randomGeneral = GENERALS[Math.floor(Math.random() * GENERALS.length)];
         this.general = {
             name: randomGeneral.name,
@@ -55,12 +67,23 @@ class User {
             recruitScroll: 0
         };
         
-        this.position = { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) };
+        // 治安 & 兵器
+        this.security = 80;
+        this.weapon = 0;
+        
+        // ⭐ 回合制新增字段
+        this.month = 1;              // 当前月份（从1月开始）
+        this.actionPoints = 5;       // 当前行动力（每月5点）
+        this.maxActionPoints = 5;    // 每月最大行动力
+        
+        this.position = {
+            x: Math.floor(Math.random() * 10),
+            y: Math.floor(Math.random() * 10)
+        };
         this.createdAt = new Date().toISOString();
         this.lastLogin = new Date().toISOString();
     }
 }
 
-// ⭐ 只导出一次！
 module.exports = User;
 module.exports.GENERALS = GENERALS;

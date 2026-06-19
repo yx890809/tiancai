@@ -5,9 +5,9 @@
       "password": "$2a$10$l1f.qsd7BaW4gZCK/8UvHOWkuPm2jPvEQYOjSd4MIQl4.KpyqtOde",
       "tribeName": "天墟",
       "resources": {
-        "food": 592,
-        "wood": 707,
-        "iron": 62
+        "food": 407,
+        "wood": 792,
+        "iron": 1
       },
       "buildings": {
         "mainCastle": 1,
@@ -16,21 +16,21 @@
       },
       "position": {
         "x": 3,
-        "y": 3
+        "y": 1
       },
       "createdAt": "2026-06-18T08:00:00.000Z",
-      "lastLogin": "2026-06-19T07:20:43.643Z",
+      "lastLogin": "2026-06-19T09:17:59.686Z",
       "army": {
-        "infantry": 110,
-        "cavalry": 89,
-        "archer": 60
+        "infantry": 216,
+        "cavalry": 177,
+        "archer": 121
       },
       "allies": [
         "yx123"
       ],
       "items": {
         "defendScroll": 10,
-        "scoutScroll": 9,
+        "scoutScroll": 10,
         "recruitScroll": 0
       },
       "general": {
@@ -40,7 +40,12 @@
         "leadership": 80,
         "level": 1,
         "exp": 0
-      }
+      },
+      "security": 100,
+      "weapon": 62,
+      "month": 2,
+      "actionPoints": 0,
+      "maxActionPoints": 5
     },
     {
       "username": "yx123",

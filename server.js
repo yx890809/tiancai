@@ -20,18 +20,31 @@ app.use(session({
 const DATA_PATH = path.join(__dirname, 'data', 'users.json');
 const CHAT_PATH = path.join(__dirname, 'data', 'chat.json');
 
-// ===== 城池数据 =====
+// ============================================================
+// ===== ⭐ 多城池系统（10座城池，分布在大地图上） =====
+// ============================================================
 const CITIES = [
-    { id: 'city_1', name: '洛阳', x: 2, y: 2, owner: null, defense: 1.5 },
-    { id: 'city_2', name: '长安', x: 7, y: 2, owner: null, defense: 1.5 },
-    { id: 'city_3', name: '建业', x: 2, y: 7, owner: null, defense: 1.5 },
-    { id: 'city_4', name: '成都', x: 7, y: 7, owner: null, defense: 1.5 }
+    // 原4座城池（位置调整到20x20地图上）
+    { id: 'city_1', name: '洛阳', x: 3, y: 3, owner: null, defense: 1.5 },
+    { id: 'city_2', name: '长安', x: 16, y: 3, owner: null, defense: 1.5 },
+    { id: 'city_3', name: '建业', x: 3, y: 16, owner: null, defense: 1.5 },
+    { id: 'city_4', name: '成都', x: 16, y: 16, owner: null, defense: 1.5 },
+    // 新增6座城池
+    { id: 'city_5', name: '许昌', x: 7, y: 7, owner: null, defense: 1.3 },
+    { id: 'city_6', name: '邺城', x: 12, y: 7, owner: null, defense: 1.3 },
+    { id: 'city_7', name: '汉中', x: 7, y: 12, owner: null, defense: 1.3 },
+    { id: 'city_8', name: '江陵', x: 12, y: 12, owner: null, defense: 1.3 },
+    { id: 'city_9', name: '襄阳', x: 5, y: 10, owner: null, defense: 1.4 },
+    { id: 'city_10', name: '合肥', x: 14, y: 10, owner: null, defense: 1.4 }
 ];
 
-// ===== 地形数据 =====
+// ============================================================
+// ===== ⭐ 大地形生成（20×20，更丰富） =====
+// ============================================================
 function generateTerrain() {
-    const size = 10;
+    const size = 20;
     const terrain = [];
+    // 固定种子
     function seededRandom(seed) {
         let s = seed;
         return function() {
@@ -40,25 +53,88 @@ function generateTerrain() {
         };
     }
     const rng = seededRandom(42);
+
+    // 初始化所有格为草地
     for (let y = 0; y < size; y++) {
         terrain[y] = [];
         for (let x = 0; x < size; x++) {
+            terrain[y][x] = 'grass';
+        }
+    }
+
+    // 生成山脉区域（在边缘和中部随机分布）
+    // 边缘山
+    for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
             if (x === 0 || x === size - 1 || y === 0 || y === size - 1) {
                 terrain[y][x] = 'mountain';
-            } else {
-                const val = rng();
-                if (val < 0.15) terrain[y][x] = 'water';
-                else if (val < 0.35) terrain[y][x] = 'mountain';
-                else if (val < 0.55) terrain[y][x] = 'forest';
-                else terrain[y][x] = 'grass';
             }
         }
     }
+    // 内部山脉（随机几个山脉群）
+    const mountainCenters = [
+        [5, 5], [15, 5], [5, 15], [15, 15], [10, 10],
+        [2, 10], [18, 10], [10, 2], [10, 18]
+    ];
+    mountainCenters.forEach(([cx, cy]) => {
+        for (let dy = -2; dy <= 2; dy++) {
+            for (let dx = -2; dx <= 2; dx++) {
+                const nx = cx + dx;
+                const ny = cy + dy;
+                if (nx >= 0 && nx < size && ny >= 0 && ny < size) {
+                    // 山脉概率
+                    const prob = 1 - (Math.abs(dx) + Math.abs(dy)) / 4;
+                    if (Math.random() < prob * 0.7) {
+                        terrain[ny][nx] = 'mountain';
+                    }
+                }
+            }
+        }
+    });
+
+    // 生成河流（从左下到右上的弯曲河流）
+    const riverPath = [
+        [1, 18], [2, 16], [4, 14], [6, 13], [9, 12],
+        [12, 11], [14, 10], [16, 9], [18, 7], [19, 5]
+    ];
+    riverPath.forEach(([x, y]) => {
+        for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+                const nx = x + dx;
+                const ny = y + dy;
+                if (nx >= 0 && nx < size && ny >= 0 && ny < size) {
+                    if (Math.random() > 0.3) terrain[ny][nx] = 'water';
+                }
+            }
+        }
+    });
+
+    // 森林区域（在草地随机）
+    for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+            if (terrain[y][x] === 'grass' && Math.random() < 0.15) {
+                terrain[y][x] = 'forest';
+            }
+        }
+    }
+
+    // 确保城池位置是草地（可通行）
     CITIES.forEach(c => {
         if (c.x >= 0 && c.x < size && c.y >= 0 && c.y < size) {
             terrain[c.y][c.x] = 'grass';
+            // 周围一圈也设为草地（方便建设）
+            for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                    const nx = c.x + dx;
+                    const ny = c.y + dy;
+                    if (nx >= 0 && nx < size && ny >= 0 && ny < size) {
+                        terrain[ny][nx] = 'grass';
+                    }
+                }
+            }
         }
     });
+
     return terrain;
 }
 const TERRAIN = generateTerrain();
@@ -163,8 +239,24 @@ app.get('/api/profile', (req, res) => {
             user.items = { defendScroll: 0, scoutScroll: 0, recruitScroll: 0 };
             writeUsers(users);
         }
+        if (user.security === undefined) {
+            user.security = 80;
+            writeUsers(users);
+        }
+        if (user.weapon === undefined) {
+            user.weapon = 0;
+            writeUsers(users);
+        }
+        if (user.month === undefined) {
+            user.month = 1;
+            user.actionPoints = 5;
+            user.maxActionPoints = 5;
+            writeUsers(users);
+        }
         if (!user.general) {
-            const { GENERALS } = require('./models/User');
+            const GENERALS = require('./models/User').GENERALS || [
+                { name: '吕布', force: 100, intelligence: 26, leadership: 85 }
+            ];
             const randomGeneral = GENERALS[Math.floor(Math.random() * GENERALS.length)];
             user.general = {
                 name: randomGeneral.name,
@@ -198,6 +290,17 @@ app.get('/api/profile', (req, res) => {
             }
         } else {
             bonusMessage = '🟢 当前在线，继续经营吧！';
+        }
+
+        // 治安自动衰减
+        if (diffMinutes >= 5) {
+            const decay = Math.floor(diffMinutes / 60);
+            if (decay > 0) {
+                user.security = Math.max(0, user.security - decay);
+                if (decay > 0) {
+                    bonusMessage += ` 治安下降 ${decay} 点（当前 ${user.security}）`;
+                }
+            }
         }
 
         user.lastLogin = now.toISOString();
@@ -236,10 +339,14 @@ app.post('/api/produce/food', (req, res) => {
         const users = readUsers();
         const user = users.find(u => u.username === req.session.user.username);
         if (!user) return res.status(404).json({ success: false, msg: '用户不存在' });
+        if (user.actionPoints <= 0) {
+            return res.status(400).json({ success: false, msg: '行动力不足！' });
+        }
         user.resources.food += 10;
+        user.actionPoints -= 1;
         user.lastLogin = new Date().toISOString();
         writeUsers(users);
-        res.json({ success: true, msg: '粮食+10', data: { food: user.resources.food } });
+        res.json({ success: true, msg: '粮食+10', data: { food: user.resources.food, actionPoints: user.actionPoints } });
     } catch (error) {
         console.error('生产错误:', error);
         res.status(500).json({ success: false, msg: '服务器错误' });
@@ -252,10 +359,14 @@ app.post('/api/produce/wood', (req, res) => {
         const users = readUsers();
         const user = users.find(u => u.username === req.session.user.username);
         if (!user) return res.status(404).json({ success: false, msg: '用户不存在' });
+        if (user.actionPoints <= 0) {
+            return res.status(400).json({ success: false, msg: '行动力不足！' });
+        }
         user.resources.wood += 10;
+        user.actionPoints -= 1;
         user.lastLogin = new Date().toISOString();
         writeUsers(users);
-        res.json({ success: true, msg: '木材+10', data: { wood: user.resources.wood } });
+        res.json({ success: true, msg: '木材+10', data: { wood: user.resources.wood, actionPoints: user.actionPoints } });
     } catch (error) {
         console.error('生产错误:', error);
         res.status(500).json({ success: false, msg: '服务器错误' });
@@ -268,23 +379,28 @@ app.post('/api/produce/iron', (req, res) => {
         const users = readUsers();
         const user = users.find(u => u.username === req.session.user.username);
         if (!user) return res.status(404).json({ success: false, msg: '用户不存在' });
+        if (user.actionPoints <= 0) {
+            return res.status(400).json({ success: false, msg: '行动力不足！' });
+        }
         user.resources.iron += 10;
+        user.actionPoints -= 1;
         user.lastLogin = new Date().toISOString();
         writeUsers(users);
-        res.json({ success: true, msg: '铁矿+10', data: { iron: user.resources.iron } });
+        res.json({ success: true, msg: '铁矿+10', data: { iron: user.resources.iron, actionPoints: user.actionPoints } });
     } catch (error) {
         console.error('生产错误:', error);
         res.status(500).json({ success: false, msg: '服务器错误' });
     }
 });
 
-// ========== 移动 ==========
+// ========== 移动（适配20x20） ==========
 app.post('/api/move', (req, res) => {
     try {
         if (!req.session.user) return res.status(401).json({ success: false, msg: '未登录' });
         const { x, y } = req.body;
-        if (x === undefined || y === undefined || x < 0 || x > 9 || y < 0 || y > 9) {
-            return res.status(400).json({ success: false, msg: '坐标超出边界（0-9）' });
+        const gridSize = 20;
+        if (x === undefined || y === undefined || x < 0 || x >= gridSize || y < 0 || y >= gridSize) {
+            return res.status(400).json({ success: false, msg: `坐标超出边界（0-${gridSize-1}）` });
         }
 
         const users = readUsers();
@@ -296,6 +412,7 @@ app.post('/api/move', (req, res) => {
             return res.status(400).json({ success: false, msg: '⛰️ 此处地形无法通行！' });
         }
 
+        // 检查城池
         const city = CITIES.find(c => c.x === x && c.y === y && c.owner && c.owner !== user.username);
         if (city) {
             return res.status(400).json({ 
@@ -308,6 +425,7 @@ app.post('/api/move', (req, res) => {
         user.position.y = y;
         user.lastLogin = new Date().toISOString();
 
+        // 无主城池
         const emptyCity = CITIES.find(c => c.x === x && c.y === y && !c.owner);
         if (emptyCity) {
             emptyCity.owner = user.username;
@@ -601,7 +719,7 @@ app.post('/api/siege', (req, res) => {
     }
 });
 
-// ========== 🤝 联盟系统 ==========
+// ========== 联盟 ==========
 app.post('/api/alliance/request', (req, res) => {
     try {
         if (!req.session.user) return res.status(401).json({ success: false, msg: '未登录' });
@@ -666,17 +784,14 @@ app.post('/api/alliance/break', (req, res) => {
     }
 });
 
-// ============================================================
-// ===== ⭐ 商店系统 =====
-// ============================================================
-
+// ========== 商店 ==========
 const SHOP_ITEMS = [
     {
         id: 'recruitScroll',
         name: '增兵令',
         icon: '📜',
         desc: '立即获得 +50 兵力（随机分配）',
-        cost: { food: 20, iron: 10 },
+        cost: { food: 50, iron: 30 },
         effect: { type: 'addArmy', value: 50 }
     },
     {
@@ -799,7 +914,109 @@ app.post('/api/shop/scout', (req, res) => {
     }
 });
 
-// ============================================================
+// ========== 巡逻 ==========
+app.post('/api/patrol', (req, res) => {
+    try {
+        if (!req.session.user) return res.status(401).json({ success: false, msg: '未登录' });
+        const users = readUsers();
+        const user = users.find(u => u.username === req.session.user.username);
+        if (!user) return res.status(404).json({ success: false, msg: '用户不存在' });
+        if (user.actionPoints <= 0) {
+            return res.status(400).json({ success: false, msg: '行动力不足！' });
+        }
+        const cost = 10;
+        if (user.resources.food < cost) {
+            return res.status(400).json({ success: false, msg: `粮食不足！需要 ${cost} 粮食进行巡逻` });
+        }
+        if (user.security >= 100) {
+            return res.status(400).json({ success: false, msg: '治安已满，无需巡逻' });
+        }
+        user.resources.food -= cost;
+        const increase = 5 + Math.floor(Math.random() * 6);
+        user.security = Math.min(100, user.security + increase);
+        user.actionPoints -= 1;
+        user.lastLogin = new Date().toISOString();
+        writeUsers(users);
+        res.json({
+            success: true,
+            msg: `✅ 巡逻成功！消耗 ${cost} 粮食，治安 +${increase}（当前 ${user.security}），行动力 -1`,
+            data: { food: user.resources.food, security: user.security, actionPoints: user.actionPoints }
+        });
+    } catch (error) {
+        console.error('巡逻错误:', error);
+        res.status(500).json({ success: false, msg: '服务器错误' });
+    }
+});
+
+// ========== 铸兵 ==========
+app.post('/api/forge', (req, res) => {
+    try {
+        if (!req.session.user) return res.status(401).json({ success: false, msg: '未登录' });
+        const users = readUsers();
+        const user = users.find(u => u.username === req.session.user.username);
+        if (!user) return res.status(404).json({ success: false, msg: '用户不存在' });
+        if (user.actionPoints <= 0) {
+            return res.status(400).json({ success: false, msg: '行动力不足！' });
+        }
+        const costIron = 20;
+        const costWood = 10;
+        if (user.resources.iron < costIron || user.resources.wood < costWood) {
+            return res.status(400).json({ success: false, msg: `资源不足！需要 铁矿${costIron}，木材${costWood}` });
+        }
+        user.resources.iron -= costIron;
+        user.resources.wood -= costWood;
+        const gain = 10 + Math.floor(Math.random() * 11);
+        user.weapon = (user.weapon || 0) + gain;
+        user.actionPoints -= 1;
+        user.lastLogin = new Date().toISOString();
+        writeUsers(users);
+        res.json({
+            success: true,
+            msg: `✅ 打造成功！消耗 铁矿${costIron}，木材${costWood}，兵器 +${gain}（当前 ${user.weapon}），行动力 -1`,
+            data: { iron: user.resources.iron, wood: user.resources.wood, weapon: user.weapon, actionPoints: user.actionPoints }
+        });
+    } catch (error) {
+        console.error('打造错误:', error);
+        res.status(500).json({ success: false, msg: '服务器错误' });
+    }
+});
+
+// ========== 结束回合 ==========
+app.post('/api/endturn', (req, res) => {
+    try {
+        if (!req.session.user) return res.status(401).json({ success: false, msg: '未登录' });
+        const users = readUsers();
+        const user = users.find(u => u.username === req.session.user.username);
+        if (!user) return res.status(404).json({ success: false, msg: '用户不存在' });
+
+        user.month = (user.month || 1) + 1;
+        user.actionPoints = user.maxActionPoints || 5;
+        const securityBonus = 0.5 + (user.security / 100) * 0.5;
+        const foodGain = Math.floor(5 * securityBonus);
+        const woodGain = Math.floor(3 * securityBonus);
+        const ironGain = Math.floor(2 * securityBonus);
+        user.resources.food += foodGain;
+        user.resources.wood += woodGain;
+        user.resources.iron += ironGain;
+        user.security = Math.max(0, user.security - 1);
+        user.lastLogin = new Date().toISOString();
+        writeUsers(users);
+
+        res.json({
+            success: true,
+            msg: `📅 进入第 ${user.month} 月！资源产出：粮食+${foodGain}，木材+${woodGain}，铁矿+${ironGain}，行动力已恢复`,
+            data: {
+                month: user.month,
+                actionPoints: user.actionPoints,
+                resources: user.resources,
+                security: user.security
+            }
+        });
+    } catch (error) {
+        console.error('结束回合错误:', error);
+        res.status(500).json({ success: false, msg: '服务器错误' });
+    }
+});
 
 // ========== 排行榜 ==========
 app.get('/api/ranking', (req, res) => {

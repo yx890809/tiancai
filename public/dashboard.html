@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>我的部落</title>
+    <title>群雄割据</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -16,11 +16,11 @@
             align-items: center;
         }
         .container {
-            max-width: 750px;
+            max-width: 800px;
             width: 100%;
             background: #2c1810;
-            padding: 15px;
-            border-radius: 20px;
+            padding: 12px;
+            border-radius: 16px;
             border: 2px solid #b8860b;
         }
         .header {
@@ -28,31 +28,59 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #5a3a2a;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
         }
-        .header h1 { color: #ffd700; font-size: 20px; }
-        .header .sub { color: #8a7a6a; font-size: 13px; }
+        .header h1 { color: #ffd700; font-size: 18px; }
+        .header .sub { color: #8a7a6a; font-size: 12px; }
         .logout-btn {
             background: #5a2a1a;
             border: none;
             color: #fff;
-            padding: 6px 16px;
-            border-radius: 8px;
+            padding: 4px 14px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 12px;
         }
         .logout-btn:hover { background: #8a3a2a; }
-        
+
+        /* ===== 顶部状态栏 ===== */
+        .status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+            background: #1a0e08;
+            border-radius: 8px;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            border: 1px solid #3a2a1a;
+            font-size: 11px;
+            justify-content: space-between;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .status-item .label { color: #8a7a6a; }
+        .status-item .value { color: #ffd700; font-weight: bold; }
+        .status-item .value.food { color: #7bed9f; }
+        .status-item .value.wood { color: #daa520; }
+        .status-item .value.iron { color: #b0c4de; }
+        .status-item .value.army { color: #ff6b6b; }
+        .status-item .value.security { color: #4a8ab8; }
+        .status-item .value.weapon { color: #ff8c00; }
+
         .bonus-box {
             background: #1a2a1a;
             border: 1px solid #7bed9f;
-            border-radius: 10px;
-            padding: 8px 12px;
-            margin-bottom: 10px;
+            border-radius: 6px;
+            padding: 4px 10px;
+            margin-bottom: 6px;
             color: #7bed9f;
             text-align: center;
-            font-size: 13px;
-            min-height: 35px;
+            font-size: 11px;
+            min-height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -66,7 +94,7 @@
         /* ===== 地图 ===== */
         #mapContainer {
             width: 100%;
-            max-width: 500px;
+            max-width: 700px;
             margin: 0 auto;
             position: relative;
         }
@@ -80,43 +108,35 @@
             background: #1a0e08;
             display: block;
         }
-        
-        .position-info { text-align: center; color: #8a7a6a; font-size: 12px; margin-top: 5px; }
+        .position-info { text-align: center; color: #8a7a6a; font-size: 11px; margin-top: 4px; }
 
-        /* ===== 弹出菜单（固定定位） ===== */
+        /* ===== 弹出菜单 ===== */
         #popupMenu {
             display: none;
             position: fixed;
             background: #2c1810;
             border: 2px solid #b8860b;
-            border-radius: 12px;
-            padding: 8px 0;
-            min-width: 140px;
+            border-radius: 10px;
+            padding: 6px 0;
+            min-width: 120px;
             z-index: 1000;
             box-shadow: 0 8px 30px rgba(0,0,0,0.9);
             pointer-events: auto;
         }
-        #popupMenu.active {
-            display: block;
-        }
+        #popupMenu.active { display: block; }
         #popupMenu .menu-item {
-            padding: 8px 20px;
+            padding: 6px 16px;
             color: #f0e0c0;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.2s;
             border-bottom: 1px solid #3a2a1a;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
-        #popupMenu .menu-item:last-child {
-            border-bottom: none;
-        }
-        #popupMenu .menu-item:hover {
-            background: #3a2a1a;
-            color: #ffd700;
-        }
+        #popupMenu .menu-item:last-child { border-bottom: none; }
+        #popupMenu .menu-item:hover { background: #3a2a1a; color: #ffd700; }
 
         /* ===== 面板 ===== */
         .panel-overlay {
@@ -132,160 +152,217 @@
         .panel {
             background: #2c1810;
             border: 2px solid #b8860b;
-            border-radius: 20px;
-            padding: 20px 25px;
-            max-width: 480px;
+            border-radius: 16px;
+            padding: 16px 20px;
+            max-width: 450px;
             width: 92%;
             max-height: 80vh;
             overflow-y: auto;
-            box-shadow: 0 0 50px rgba(184, 134, 11, 0.3);
+            box-shadow: 0 0 40px rgba(184, 134, 11, 0.3);
         }
         .panel h2 {
             color: #ffd700;
             text-align: center;
-            margin-bottom: 15px;
-            font-size: 20px;
+            margin-bottom: 12px;
+            font-size: 18px;
             border-bottom: 1px solid #3a2a1a;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
         .panel .close-btn {
             float: right;
             background: none;
             border: none;
             color: #8a7a6a;
-            font-size: 22px;
+            font-size: 20px;
             cursor: pointer;
         }
         .panel .close-btn:hover { color: #ff6b6b; }
-
         .panel .resources {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         .panel .resource-card {
             background: #1a0e08;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px;
+            border-radius: 8px;
             text-align: center;
             border: 1px solid #3a2a1a;
         }
-        .panel .resource-card .icon { font-size: 20px; }
-        .panel .resource-card .value { font-size: 20px; font-weight: bold; color: #ffd700; }
-        .panel .resource-card .label { font-size: 12px; color: #8a7a6a; }
+        .panel .resource-card .icon { font-size: 18px; }
+        .panel .resource-card .value { font-size: 18px; font-weight: bold; color: #ffd700; }
+        .panel .resource-card .label { font-size: 11px; color: #8a7a6a; }
         .panel .resource-card button {
             margin-top: 4px;
-            padding: 3px 10px;
+            padding: 2px 8px;
             background: #3a2a1a;
             border: 1px solid #5a3a2a;
-            border-radius: 6px;
+            border-radius: 4px;
             color: #f0e0c0;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 10px;
         }
         .panel .resource-card button:hover { background: #5a3a2a; }
-
         .panel .buildings {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         .panel .building-card {
             background: #1a0e08;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px;
+            border-radius: 8px;
             text-align: center;
             border: 1px solid #3a2a1a;
         }
-        .panel .building-card .icon { font-size: 20px; }
-        .panel .building-card .level { font-size: 18px; font-weight: bold; color: #7bed9f; }
-        .panel .building-card .label { font-size: 12px; color: #8a7a6a; }
+        .panel .building-card .icon { font-size: 18px; }
+        .panel .building-card .level { font-size: 16px; font-weight: bold; color: #7bed9f; }
+        .panel .building-card .label { font-size: 11px; color: #8a7a6a; }
 
         .panel .army {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         .panel .army-card {
             background: #1a0e08;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px;
+            border-radius: 8px;
             text-align: center;
             border: 1px solid #3a2a1a;
         }
-        .panel .army-card .icon { font-size: 20px; }
-        .panel .army-card .count { font-size: 18px; font-weight: bold; color: #ff6b6b; }
-        .panel .army-card .label { font-size: 11px; color: #8a7a6a; }
+        .panel .army-card .icon { font-size: 18px; }
+        .panel .army-card .count { font-size: 16px; font-weight: bold; color: #ff6b6b; }
+        .panel .army-card .label { font-size: 10px; color: #8a7a6a; }
         .panel .army-card .recruit-btn {
             margin-top: 4px;
-            padding: 3px 10px;
+            padding: 2px 8px;
             background: #2a1a3a;
             border: 1px solid #5a3a6a;
-            border-radius: 6px;
+            border-radius: 4px;
             color: #f0e0c0;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 10px;
         }
         .panel .army-card .recruit-btn:hover { background: #3a2a5a; border-color: #b886ff; }
-
         .panel .shop-items {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             justify-content: center;
         }
         .panel .shop-item {
             background: #0a0a0a;
             border: 1px solid #3a2a1a;
-            border-radius: 10px;
-            padding: 8px 12px;
+            border-radius: 8px;
+            padding: 6px 10px;
             text-align: center;
-            min-width: 90px;
+            min-width: 80px;
             flex: 1;
-            max-width: 130px;
+            max-width: 120px;
         }
-        .panel .shop-item .icon { font-size: 20px; }
-        .panel .shop-item .name { font-size: 13px; color: #ffd700; font-weight: bold; }
-        .panel .shop-item .desc { font-size: 10px; color: #8a7a6a; }
-        .panel .shop-item .cost { font-size: 10px; color: #7bed9f; }
+        .panel .shop-item .icon { font-size: 18px; }
+        .panel .shop-item .name { font-size: 12px; color: #ffd700; font-weight: bold; }
+        .panel .shop-item .desc { font-size: 9px; color: #8a7a6a; }
+        .panel .shop-item .cost { font-size: 9px; color: #7bed9f; }
         .panel .shop-item button {
             margin-top: 4px;
-            padding: 2px 10px;
+            padding: 2px 8px;
             background: #2a1a3a;
             border: 1px solid #5a3a6a;
-            border-radius: 6px;
+            border-radius: 4px;
             color: #f0e0c0;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 10px;
         }
         .panel .shop-item button:hover { background: #3a2a5a; border-color: #b886ff; }
-
         .panel .general-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: #1a0e08;
-            border-radius: 10px;
-            padding: 8px 12px;
-            margin-bottom: 12px;
+            border-radius: 8px;
+            padding: 6px 10px;
+            margin-bottom: 10px;
             border: 1px solid #3a2a1a;
             flex-wrap: wrap;
         }
-        .panel .general-info .avatar { font-size: 24px; }
+        .panel .general-info .avatar { font-size: 22px; }
         .panel .general-info .details { flex: 1; }
-        .panel .general-info .details .name { color: #ffd700; font-weight: bold; font-size: 15px; }
-        .panel .general-info .details .stats { font-size: 11px; color: #8a7a6a; }
+        .panel .general-info .details .name { color: #ffd700; font-weight: bold; font-size: 14px; }
+        .panel .general-info .details .stats { font-size: 10px; color: #8a7a6a; }
         .panel .general-info .details .stats span { color: #f0e0c0; }
+
+        /* ===== 指令面板（回合制） ===== */
+        .action-panel {
+            background: #1a0e08;
+            border-radius: 10px;
+            border: 1px solid #3a2a1a;
+            padding: 8px 10px;
+            margin: 6px 0;
+        }
+        .action-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        .action-header .month {
+            color: #ffd700;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .action-header .ap {
+            color: #7bed9f;
+            font-size: 13px;
+        }
+        .action-header .ap span { color: #ffd700; }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .action-btn {
+            padding: 3px 10px;
+            background: #2a1a3a;
+            border: 1px solid #5a3a6a;
+            border-radius: 5px;
+            color: #f0e0c0;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.2s;
+            flex: 1;
+            min-width: 55px;
+            text-align: center;
+        }
+        .action-btn:hover:not(:disabled) {
+            background: #3a2a5a;
+            border-color: #b886ff;
+        }
+        .action-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .action-btn.end-turn {
+            background: #5a2a1a;
+            border-color: #8a3a2a;
+            flex: 0 0 auto;
+        }
+        .action-btn.end-turn:hover:not(:disabled) {
+            background: #8a3a2a;
+            border-color: #ff6b6b;
+        }
 
         /* ===== 底部功能区 ===== */
         .bottom-bar {
             display: flex !important;
-            gap: 10px !important;
-            margin-top: 12px !important;
-            padding-top: 10px !important;
+            gap: 6px !important;
+            margin-top: 6px !important;
+            padding-top: 6px !important;
             border-top: 2px solid #3a2a1a !important;
             flex-wrap: wrap !important;
             justify-content: center !important;
@@ -293,11 +370,11 @@
         }
         .bottom-col {
             flex: 1 1 30% !important;
-            min-width: 150px !important;
+            min-width: 110px !important;
             max-width: 33.33% !important;
             background: #1a0e08 !important;
-            border-radius: 10px !important;
-            padding: 8px 10px !important;
+            border-radius: 8px !important;
+            padding: 5px 7px !important;
             border: 1px solid #3a2a1a !important;
             overflow: hidden !important;
             box-sizing: border-box !important;
@@ -308,70 +385,65 @@
             margin-top: 0 !important;
             border-top: none !important;
             padding-top: 0 !important;
-            font-size: 13px !important;
+            font-size: 11px !important;
         }
         .bottom-col #rankList,
         .bottom-col #allianceContainer,
         .bottom-col #chatContainer {
-            margin-bottom: 5px !important;
-            max-height: 100px !important;
+            margin-bottom: 3px !important;
+            max-height: 70px !important;
         }
         .bottom-col .chat-input-row {
             margin-bottom: 0 !important;
         }
         .bottom-col .chat-input-row input {
-            font-size: 12px !important;
-            padding: 4px 8px !important;
+            font-size: 10px !important;
+            padding: 2px 5px !important;
         }
         .bottom-col .chat-input-row button {
-            font-size: 12px !important;
-            padding: 4px 10px !important;
+            font-size: 10px !important;
+            padding: 2px 6px !important;
         }
         .bottom-col .alliance-actions input {
-            font-size: 12px !important;
-            padding: 3px 6px !important;
+            font-size: 10px !important;
+            padding: 2px 4px !important;
         }
         .bottom-col .alliance-actions button {
-            font-size: 11px !important;
-            padding: 3px 8px !important;
+            font-size: 9px !important;
+            padding: 2px 5px !important;
         }
         .bottom-col .rank-item {
-            font-size: 12px !important;
-            padding: 3px 8px !important;
+            font-size: 10px !important;
+            padding: 2px 5px !important;
         }
         .bottom-col .rank-header {
-            font-size: 10px !important;
-            padding: 4px 8px !important;
+            font-size: 8px !important;
+            padding: 2px 5px !important;
         }
-        .bottom-col .rank-item .tribe { font-size: 11px !important; }
-        .bottom-col .rank-item .lord { font-size: 10px !important; }
-        .bottom-col #rankList {
-            max-height: 100px !important;
-        }
+        .bottom-col .rank-item .tribe { font-size: 9px !important; }
+        .bottom-col .rank-item .lord { font-size: 8px !important; }
+        .bottom-col #rankList { max-height: 70px !important; }
         .bottom-col #chatContainer {
-            max-height: 80px !important;
-            font-size: 12px !important;
-            padding: 4px 8px !important;
+            max-height: 55px !important;
+            font-size: 10px !important;
+            padding: 3px 5px !important;
         }
         .bottom-col .alliance-list {
-            max-height: 60px !important;
-            font-size: 12px !important;
+            max-height: 45px !important;
+            font-size: 10px !important;
         }
-        .bottom-col .alliance-item {
-            font-size: 11px !important;
-            padding: 1px 8px !important;
-        }
+        .bottom-col .alliance-item { font-size: 9px !important; padding: 1px 5px !important; }
 
         .msg-box {
             background: #1a0e08;
-            padding: 8px 12px;
-            border-radius: 10px;
-            min-height: 35px;
+            padding: 5px 8px;
+            border-radius: 6px;
+            min-height: 26px;
             border-left: 3px solid #b8860b;
-            font-size: 13px;
+            font-size: 11px;
             display: flex;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 6px;
         }
         .msg-box.success { border-left-color: #7bed9f; color: #7bed9f; }
         .msg-box.error { border-left-color: #ff6b6b; color: #ff6b6b; }
@@ -391,61 +463,52 @@
         .modal {
             background: #2c1810;
             border: 2px solid #b8860b;
-            border-radius: 20px;
-            padding: 20px;
-            max-width: 500px;
+            border-radius: 16px;
+            padding: 16px;
+            max-width: 460px;
             width: 92%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 0 50px rgba(184, 134, 11, 0.3);
+            box-shadow: 0 0 40px rgba(184, 134, 11, 0.3);
         }
-        .modal h2 { color: #ffd700; text-align: center; margin-bottom: 10px; font-size: 20px; }
+        .modal h2 { color: #ffd700; text-align: center; margin-bottom: 8px; font-size: 18px; }
         .modal .target-info {
             text-align: center;
             color: #c0a060;
-            font-size: 14px;
-            margin-bottom: 10px;
+            font-size: 13px;
+            margin-bottom: 8px;
         }
-        
         #particleCanvas {
             width: 100%;
-            height: 160px;
+            height: 140px;
             background: #0a0a0a;
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid #3a2a1a;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
-        
         .army-bars {
             display: flex;
-            gap: 15px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 10px;
             justify-content: center;
         }
-        .army-bar-group {
-            flex: 1;
-            text-align: center;
-        }
-        .army-bar-group .label {
-            font-size: 12px;
-            color: #8a7a6a;
-            margin-bottom: 3px;
-        }
+        .army-bar-group { flex: 1; text-align: center; }
+        .army-bar-group .label { font-size: 11px; color: #8a7a6a; margin-bottom: 2px; }
         .army-bar-group .label .name { font-weight: bold; color: #f0e0c0; }
         .army-bar-group .label .total { color: #ffd700; }
         .army-bar-track {
             width: 100%;
-            height: 16px;
+            height: 14px;
             background: #1a0e08;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             border: 1px solid #3a2a1a;
             position: relative;
         }
         .army-bar-fill {
             height: 100%;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: width 0.8s ease;
             width: 100%;
         }
@@ -456,23 +519,22 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 10px;
+            font-size: 9px;
             font-weight: bold;
             color: #fff;
             text-shadow: 0 1px 4px rgba(0,0,0,0.8);
         }
-        
         .battle-log-area {
             background: #1a0e08;
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin: 10px 0;
-            min-height: 60px;
-            max-height: 120px;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin: 8px 0;
+            min-height: 50px;
+            max-height: 100px;
             overflow-y: auto;
             border: 1px solid #2a1a12;
-            font-size: 13px;
-            line-height: 1.7;
+            font-size: 12px;
+            line-height: 1.6;
         }
         .battle-log-area .log-entry {
             padding: 2px 0;
@@ -482,74 +544,57 @@
         }
         .battle-log-area .log-entry:last-child { border-bottom: none; }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .battle-log-area .log-entry .highlight-a { color: #ff6b6b; font-weight: bold; }
         .battle-log-area .log-entry .highlight-d { color: #4a8ab8; font-weight: bold; }
         .battle-log-area .log-entry .info { color: #c0a060; }
-        
         .battle-result-area {
             text-align: center;
-            font-size: 17px;
-            padding: 8px;
-            border-radius: 10px;
-            margin: 8px 0;
+            font-size: 16px;
+            padding: 6px;
+            border-radius: 8px;
+            margin: 6px 0;
             display: none;
         }
         .battle-result-area.victory { display: block; color: #7bed9f; background: #1a2a1a; border: 1px solid #7bed9f; }
         .battle-result-area.defeat { display: block; color: #ff6b6b; background: #2a1a1a; border: 1px solid #ff6b6b; }
-        
         .modal .btn-group {
             display: flex;
-            gap: 12px;
-            margin-top: 12px;
+            gap: 10px;
+            margin-top: 10px;
         }
         .modal .btn-group button {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             border: none;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: 8px;
+            font-size: 14px;
             cursor: pointer;
             transition: 0.3s;
             font-weight: bold;
         }
-        .modal .btn-attack {
-            background: #ff4444;
-            color: #fff;
-        }
+        .modal .btn-attack { background: #ff4444; color: #fff; }
         .modal .btn-attack:hover { background: #ff6666; transform: scale(1.02); }
-        .modal .btn-attack:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .modal .btn-cancel {
-            background: #3a2a1a;
-            color: #c0a060;
-        }
+        .modal .btn-attack:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .modal .btn-cancel { background: #3a2a1a; color: #c0a060; }
         .modal .btn-cancel:hover { background: #5a3a2a; }
-        .modal .btn-close {
-            background: #b8860b;
-            color: #fff;
-        }
+        .modal .btn-close { background: #b8860b; color: #fff; }
         .modal .btn-close:hover { background: #daa520; }
-        
         .battle-status {
             text-align: center;
             color: #c0a060;
-            font-size: 13px;
-            margin: 5px 0 8px 0;
-            min-height: 20px;
+            font-size: 12px;
+            margin: 4px 0 6px 0;
+            min-height: 18px;
         }
-
         .siege-result-area {
             text-align: center;
-            font-size: 17px;
-            padding: 8px;
-            border-radius: 10px;
-            margin: 8px 0;
+            font-size: 16px;
+            padding: 6px;
+            border-radius: 8px;
+            margin: 6px 0;
             display: none;
         }
         .siege-result-area.victory { display: block; color: #7bed9f; background: #1a2a1a; border: 1px solid #7bed9f; }
@@ -557,29 +602,42 @@
 
         /* ===== 移动端适配 ===== */
         @media (max-width: 600px) {
-            .container { padding: 10px; }
-            .header h1 { font-size: 18px; }
-            .header .sub { font-size: 12px; }
-            .logout-btn { font-size: 12px; padding: 4px 12px; }
-            #mapContainer canvas { border-radius: 6px; }
-            .bottom-bar { flex-direction: column !important; gap: 8px !important; }
+            .container { padding: 8px; max-width: 100%; }
+            .header h1 { font-size: 15px; }
+            .header .sub { font-size: 10px; }
+            .logout-btn { font-size: 10px; padding: 3px 8px; }
+            .status-bar { font-size: 9px; padding: 4px 6px; gap: 3px 6px; }
+            .status-item .value { font-size: 10px; }
+            #mapContainer canvas { border-radius: 4px; }
+            .bottom-bar { flex-direction: column !important; gap: 4px !important; }
             .bottom-col { max-width: 100% !important; min-width: 100% !important; }
-            .panel { padding: 15px; }
-            .panel .resources { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .panel .buildings { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .panel .army { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .panel .shop-items { gap: 6px; }
-            .panel .shop-item { min-width: 70px; max-width: 100px; padding: 4px 6px; }
-            .modal { padding: 15px; }
-            #particleCanvas { height: 120px; }
-            .battle-log-area { font-size: 12px; max-height: 100px; padding: 6px 10px; }
-            .army-bar-track { height: 14px; }
-            .army-bar-text { font-size: 9px; }
-            .position-info { font-size: 11px; }
-            #popupMenu { min-width: 120px; }
-            #popupMenu .menu-item { font-size: 13px; padding: 6px 14px; }
-            .bonus-box { font-size: 12px; padding: 6px 10px; }
-            .msg-box { font-size: 12px; padding: 6px 10px; }
+            .panel { padding: 10px 12px; max-width: 95%; }
+            .panel .resources { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+            .panel .buildings { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+            .panel .army { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+            .panel .shop-items { gap: 4px; }
+            .panel .shop-item { min-width: 50px; max-width: 80px; padding: 3px 5px; }
+            .modal { padding: 10px; }
+            #particleCanvas { height: 90px; }
+            .battle-log-area { font-size: 10px; max-height: 70px; padding: 4px 6px; }
+            .army-bar-track { height: 10px; }
+            .army-bar-text { font-size: 7px; }
+            .position-info { font-size: 9px; }
+            #popupMenu { min-width: 90px; }
+            #popupMenu .menu-item { font-size: 11px; padding: 4px 10px; }
+            .bonus-box { font-size: 10px; padding: 3px 6px; min-height: 20px; }
+            .msg-box { font-size: 10px; padding: 3px 6px; min-height: 20px; }
+            .action-btn { font-size: 9px; padding: 2px 6px; min-width: 40px; }
+            .action-header .month { font-size: 11px; }
+            .action-header .ap { font-size: 11px; }
+            .bottom-col .rank-title,
+            .bottom-col .alliance-title,
+            .bottom-col .chat-title { font-size: 10px !important; }
+        }
+        @media (max-width: 400px) {
+            .status-bar { font-size: 8px; gap: 2px 4px; }
+            .status-item .value { font-size: 9px; }
+            .action-btn { font-size: 8px; padding: 2px 4px; min-width: 35px; }
         }
     </style>
 </head>
@@ -589,26 +647,28 @@
     <div class="header">
         <div>
             <h1>🏰 <span id="tribeName">加载中...</span></h1>
-            <div class="sub">👑 主公：<span id="username">-</span></div>
+            <div class="sub">👑 <span id="username">-</span></div>
         </div>
         <button class="logout-btn" onclick="logout()">退兵</button>
     </div>
 
+    <!-- ===== 顶部状态栏 ===== -->
+    <div class="status-bar" id="statusBar">
+        <div class="status-item">📅 <span class="label">月份</span> <span class="value" id="monthDisplay">1</span></div>
+        <div class="status-item">⚡ <span class="label">行动力</span> <span class="value" id="apDisplay">5/5</span></div>
+        <div class="status-item">🌾 <span class="label">粮食</span> <span class="value food" id="foodDisplay">-</span></div>
+        <div class="status-item">🪵 <span class="label">木材</span> <span class="value wood" id="woodDisplay">-</span></div>
+        <div class="status-item">⛏️ <span class="label">铁矿</span> <span class="value iron" id="ironDisplay">-</span></div>
+        <div class="status-item">⚔️ <span class="label">兵力</span> <span class="value army" id="armyDisplay">0</span></div>
+        <div class="status-item">🛡️ <span class="label">治安</span> <span class="value security" id="securityDisplay">-</span></div>
+        <div class="status-item">🗡️ <span class="label">兵器</span> <span class="value weapon" id="weaponDisplay">-</span></div>
+    </div>
+
     <div id="bonusArea" class="bonus-box empty">⏳ 计算离线收益中...</div>
 
-    <!-- ===== 地图 ===== -->
-    <div style="text-align:center; font-size:13px; color:#c0a060; margin-bottom:5px;">🗺️ 点击自己的 🏯 打开菜单</div>
-    <div style="display:flex; justify-content:center; gap:12px; font-size:11px; color:#8a7a6a; margin-bottom:8px; flex-wrap:wrap;">
-        <span>🏯 你（点击打开菜单）</span>
-        <span>🚩 其他玩家</span>
-        <span style="color:#ffd700;">🏰 城池</span>
-        <span style="color:#8a7a5a;">⛰️ 山</span>
-        <span style="color:#2a6a8a;">🌊 水</span>
-    </div>
-    <div id="mapContainer">
-        <!-- 地图 Canvas 由 JavaScript 生成 -->
-    </div>
-    <!-- ===== 弹出菜单（放在 mapContainer 外部） ===== -->
+    <!-- ===== 大地图（20×20） ===== -->
+    <div style="text-align:center; font-size:11px; color:#c0a060; margin-bottom:3px;">🗺️ 点击自己的 🏯 打开菜单 · 共10座城池</div>
+    <div id="mapContainer"></div>
     <div id="popupMenu">
         <div class="menu-item" onclick="openPanel('tribe')">🏰 我的部落</div>
         <div class="menu-item" onclick="openPanel('army')">⚔️ 军  队</div>
@@ -616,9 +676,24 @@
     </div>
     <div class="position-info" id="positionInfo">📍 当前位置：加载中...</div>
 
+    <!-- ===== 回合制指令面板 ===== -->
+    <div class="action-panel">
+        <div class="action-header">
+            <div class="month">📅 第 <span id="monthTitle">1</span> 月</div>
+            <div class="ap">⚡ 行动力：<span id="apTitle">5</span> / <span id="maxApTitle">5</span></div>
+        </div>
+        <div class="action-buttons">
+            <button class="action-btn" onclick="doAction('produceFood')" id="actFood">🌾 产粮</button>
+            <button class="action-btn" onclick="doAction('produceWood')" id="actWood">🪵 伐木</button>
+            <button class="action-btn" onclick="doAction('produceIron')" id="actIron">⛏️ 采矿</button>
+            <button class="action-btn" onclick="doAction('patrol')" id="actPatrol">🛡️ 巡逻</button>
+            <button class="action-btn" onclick="doAction('forge')" id="actForge">🗡️ 铸兵</button>
+            <button class="action-btn end-turn" onclick="endTurn()" id="actEndTurn">⏭️ 结束回合</button>
+        </div>
+    </div>
+
     <!-- ===== 底部功能区 ===== -->
     <div class="bottom-bar">
-        <!-- 排行榜 -->
         <div class="bottom-col">
             <div class="rank-title">🏆 诸侯排行榜</div>
             <div id="rankList">
@@ -626,12 +701,11 @@
                     <span>排名</span>
                     <span style="flex:2;">部落</span>
                     <span style="flex:1;">主公</span>
-                    <span style="width:40px;text-align:right;">兵力</span>
+                    <span style="width:32px;text-align:right;">兵力</span>
                 </div>
                 <div id="rankItems"><div class="rank-empty">⏳ 加载中...</div></div>
             </div>
         </div>
-        <!-- 联盟 -->
         <div class="bottom-col">
             <div class="alliance-title">🤝 我的联盟</div>
             <div id="allianceContainer">
@@ -645,10 +719,9 @@
                 </div>
             </div>
         </div>
-        <!-- 聊天 -->
         <div class="bottom-col">
             <div class="chat-title">💬 天下议事厅</div>
-            <div id="chatContainer"><div style="color:#5a4a3a;text-align:center;padding:6px;">⏳ 加载中...</div></div>
+            <div id="chatContainer"><div style="color:#5a4a3a;text-align:center;padding:4px;">⏳ 加载中...</div></div>
             <div class="chat-input-row">
                 <input type="text" id="chatInput" placeholder="说点什么..." maxlength="200" onkeydown="if(event.key==='Enter') sendChat()">
                 <button onclick="sendChat()">发送</button>
@@ -963,7 +1036,7 @@
     }
 
     // ============================================================
-    // ===== 🗺️ 渲染地图 =====
+    // ===== 🗺️ 渲染地图（20×20，支持10座城池） =====
     // ============================================================
     function renderMap(currentX, currentY, allPlayers, cities, terrain) {
         currentCities = cities || [];
@@ -973,8 +1046,8 @@
         container.innerHTML = '';
 
         const canvas = document.createElement('canvas');
-        const containerWidth = container.clientWidth || 350;
-        const size = Math.min(containerWidth, 500);
+        const containerWidth = container.clientWidth || 400;
+        const size = Math.min(containerWidth, 700);
         canvas.width = size;
         canvas.height = size;
         canvas.style.width = '100%';
@@ -986,11 +1059,13 @@
         container.appendChild(canvas);
 
         const ctx = canvas.getContext('2d');
-        const gridSize = 10;
+        const gridSize = 20;
         const cellSize = canvas.width / gridSize;
 
+        // 使用传入的地形数据
         const terrainData = terrain && terrain.length > 0 ? terrain : generateDefaultTerrain();
 
+        // 绘制地形
         for (let y = 0; y < gridSize; y++) {
             for (let x = 0; x < gridSize; x++) {
                 const px = x * cellSize;
@@ -1008,34 +1083,37 @@
                 ctx.fillStyle = color;
                 ctx.fillRect(px, py, cellSize, cellSize);
 
-                if (cellSize > 18) {
-                    ctx.font = `${cellSize * 0.5}px sans-serif`;
+                // 地形图标（小格子不显示文字）
+                if (cellSize > 16) {
+                    ctx.font = `${Math.min(cellSize * 0.45, 14)}px sans-serif`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     if (type === 'mountain') {
-                        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                        ctx.fillStyle = 'rgba(255,255,255,0.25)';
                         ctx.fillText('⛰️', px + cellSize / 2, py + cellSize / 2);
                     } else if (type === 'water') {
                         ctx.fillStyle = 'rgba(255,255,255,0.2)';
                         ctx.fillText('🌊', px + cellSize / 2, py + cellSize / 2);
                     } else if (type === 'forest') {
-                        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+                        ctx.fillStyle = 'rgba(255,255,255,0.12)';
                         ctx.fillText('🌳', px + cellSize / 2, py + cellSize / 2);
                     }
                 }
 
-                ctx.strokeStyle = 'rgba(0,0,0,0.1)';
-                ctx.lineWidth = 0.5;
+                ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+                ctx.lineWidth = 0.3;
                 ctx.strokeRect(px, py, cellSize, cellSize);
             }
         }
 
+        // 绘制城池（10座）
         if (cities && cities.length > 0) {
             cities.forEach(city => {
                 const px = city.x * cellSize + cellSize / 2;
                 const py = city.y * cellSize + cellSize / 2;
-                const radius = cellSize * 0.35;
+                const radius = Math.min(cellSize * 0.3, 12);
 
+                // 城池光晕
                 const glow = ctx.createRadialGradient(px, py, 0, px, py, radius * 2);
                 glow.addColorStop(0, 'rgba(255, 215, 0, 0.2)');
                 glow.addColorStop(1, 'rgba(255, 215, 0, 0)');
@@ -1044,32 +1122,39 @@
                 ctx.arc(px, py, radius * 2, 0, Math.PI * 2);
                 ctx.fill();
 
-                ctx.font = `${cellSize * 0.6}px sans-serif`;
+                // 城池图标
+                const fontSize = Math.min(cellSize * 0.55, 20);
+                ctx.font = `${fontSize}px sans-serif`;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillStyle = city.owner ? '#ff6b6b' : '#ffd700';
                 ctx.fillText('🏰', px, py - cellSize * 0.05);
 
-                ctx.fillStyle = '#fff';
-                ctx.font = `bold ${Math.max(cellSize * 0.25, 10)}px sans-serif`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'top';
-                ctx.fillText(city.name, px, py + cellSize * 0.35);
+                // 城池名字
+                if (cellSize > 16) {
+                    ctx.fillStyle = '#fff';
+                    ctx.font = `bold ${Math.min(cellSize * 0.22, 11)}px sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(city.name, px, py + cellSize * 0.3);
+                }
 
-                if (city.ownerName) {
+                // 占领者名字（小字）
+                if (city.ownerName && cellSize > 18) {
                     ctx.fillStyle = '#c0a060';
-                    ctx.font = `${Math.max(cellSize * 0.18, 8)}px sans-serif`;
+                    ctx.font = `${Math.min(cellSize * 0.16, 9)}px sans-serif`;
                     ctx.textBaseline = 'bottom';
-                    ctx.fillText(city.ownerName, px, py - cellSize * 0.45);
-                } else {
+                    ctx.fillText(city.ownerName, px, py - cellSize * 0.4);
+                } else if (!city.owner && cellSize > 18) {
                     ctx.fillStyle = '#5a7a3a';
-                    ctx.font = `${Math.max(cellSize * 0.18, 8)}px sans-serif`;
+                    ctx.font = `${Math.min(cellSize * 0.16, 9)}px sans-serif`;
                     ctx.textBaseline = 'bottom';
-                    ctx.fillText('空城', px, py - cellSize * 0.45);
+                    ctx.fillText('空城', px, py - cellSize * 0.4);
                 }
             });
         }
 
+        // 收集玩家位置
         const playerPositions = {};
         if (allPlayers) {
             allPlayers.forEach(p => {
@@ -1083,29 +1168,31 @@
             });
         }
 
+        // 绘制其他玩家
         for (const key in playerPositions) {
             const [x, y] = key.split(',').map(Number);
             if (x === currentX && y === currentY) continue;
             const players = playerPositions[key];
             const px = x * cellSize + cellSize / 2;
             const py = y * cellSize + cellSize / 2;
-            const radius = Math.min(cellSize * 0.25, 10);
+            const fontSize = Math.min(cellSize * 0.45, 16);
             ctx.fillStyle = '#4a8ab8';
-            ctx.font = `${cellSize * 0.5}px sans-serif`;
+            ctx.font = `${fontSize}px sans-serif`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText('🚩', px, py);
-            if (players.length > 1) {
+            if (players.length > 1 && cellSize > 14) {
                 ctx.fillStyle = '#ff6b6b';
-                ctx.font = `${Math.max(cellSize * 0.25, 10)}px sans-serif`;
-                ctx.fillText(`×${players.length}`, px + cellSize * 0.35, py - cellSize * 0.3);
+                ctx.font = `${Math.min(cellSize * 0.25, 11)}px sans-serif`;
+                ctx.fillText(`×${players.length}`, px + cellSize * 0.3, py - cellSize * 0.3);
             }
         }
 
+        // 绘制自己
         if (currentX !== undefined && currentY !== undefined) {
             const px = currentX * cellSize + cellSize / 2;
             const py = currentY * cellSize + cellSize / 2;
-            const radius = Math.min(cellSize * 0.35, 14);
+            const radius = Math.min(cellSize * 0.3, 12);
             const glow = ctx.createRadialGradient(px, py, 0, px, py, radius * 2.5);
             glow.addColorStop(0, 'rgba(255, 215, 0, 0.3)');
             glow.addColorStop(0.5, 'rgba(255, 215, 0, 0.08)');
@@ -1114,18 +1201,20 @@
             ctx.beginPath();
             ctx.arc(px, py, radius * 2.5, 0, Math.PI * 2);
             ctx.fill();
-            ctx.font = `${cellSize * 0.6}px sans-serif`;
+            const fontSize = Math.min(cellSize * 0.5, 18);
+            ctx.font = `${fontSize}px sans-serif`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText('🏯', px, py);
-            if (cellSize > 20) {
+            if (cellSize > 16) {
                 ctx.fillStyle = '#ffd700';
-                ctx.font = `bold ${Math.max(cellSize * 0.2, 10)}px sans-serif`;
+                ctx.font = `bold ${Math.min(cellSize * 0.2, 11)}px sans-serif`;
                 ctx.textBaseline = 'bottom';
                 ctx.fillText('你', px, py + radius * 0.6);
             }
         }
 
+        // 点击交互
         canvas.addEventListener('click', function(e) {
             const rect = canvas.getBoundingClientRect();
             const scaleX = canvas.width / rect.width;
@@ -1140,6 +1229,7 @@
             const isMe = (gridX === currentX && gridY === currentY);
             const terrainType = terrainData[gridY]?.[gridX] || 'grass';
 
+            // 检查城池
             const city = currentCities.find(c => c.x === gridX && c.y === gridY);
             if (city) {
                 if (city.owner === document.getElementById('username').textContent) {
@@ -1160,7 +1250,6 @@
             }
 
             if (isMe) {
-                // 直接用视口坐标
                 showPopupMenu(e.clientX, e.clientY);
                 return;
             }
@@ -1214,7 +1303,7 @@
     }
 
     function generateDefaultTerrain() {
-        const size = 10;
+        const size = 20;
         const terrain = [];
         function seededRandom(seed) {
             let s = seed;
@@ -1231,9 +1320,9 @@
                     terrain[y][x] = 'mountain';
                 } else {
                     const val = rng();
-                    if (val < 0.15) terrain[y][x] = 'water';
-                    else if (val < 0.35) terrain[y][x] = 'mountain';
-                    else if (val < 0.55) terrain[y][x] = 'forest';
+                    if (val < 0.12) terrain[y][x] = 'water';
+                    else if (val < 0.30) terrain[y][x] = 'mountain';
+                    else if (val < 0.50) terrain[y][x] = 'forest';
                     else terrain[y][x] = 'grass';
                 }
             }
@@ -1248,8 +1337,8 @@
         siegeTarget = city;
         document.getElementById('siegeTarget').innerHTML = `
             🎯 目标：${city.name}
-            <br><span style="font-size:13px;color:#8a7a6a;">位置：(${city.x}, ${city.y}) | 占领者：${city.ownerName || '无'}</span>
-            <br><span style="font-size:13px;color:#ff6b6b;">⚔️ 守城方兵力 × ${city.defense || 1.3} 防御加成</span>
+            <br><span style="font-size:12px;color:#8a7a6a;">位置：(${city.x}, ${city.y}) | 占领者：${city.ownerName || '无'}</span>
+            <br><span style="font-size:12px;color:#ff6b6b;">⚔️ 守城方兵力 × ${city.defense || 1.3} 防御加成</span>
         `;
         document.getElementById('siegeResult').className = 'siege-result-area';
         document.getElementById('siegeResult').textContent = '';
@@ -1311,7 +1400,7 @@
 
         document.getElementById('battleTarget').innerHTML = `
             🎯 目标：${target.tribeName}（${target.username}）
-            <br><span style="font-size:13px;color:#8a7a6a;">位置：(${target.position.x}, ${target.position.y})</span>
+            <br><span style="font-size:12px;color:#8a7a6a;">位置：(${target.position.x}, ${target.position.y})</span>
         `;
         document.getElementById('battleLogArea').innerHTML = '<div style="color:#5a4a3a;text-align:center;padding:10px;">⚔️ 准备出征...</div>';
         document.getElementById('battleResult').className = 'battle-result-area';
@@ -1552,7 +1641,7 @@
     }
 
     // ============================================================
-    // ===== 🤝 联盟系统 =====
+    // ===== 联盟系统 =====
     // ============================================================
     function loadAlliances() {
         const container = document.getElementById('allianceList');
@@ -1627,7 +1716,7 @@
     }
 
     // ============================================================
-    // ===== 🏪 商店系统 =====
+    // ===== 商店系统 =====
     // ============================================================
     async function loadShop() {
         try {
@@ -1743,7 +1832,7 @@
             const container = document.getElementById('chatContainer');
             const currentUser = document.getElementById('username').textContent;
             if (!messages || messages.length === 0) {
-                container.innerHTML = '<div style="color:#5a4a3a;text-align:center;padding:6px;">暂无消息，说点什么吧</div>';
+                container.innerHTML = '<div style="color:#5a4a3a;text-align:center;padding:4px;">暂无消息，说点什么吧</div>';
                 return;
             }
             let html = '';
@@ -1794,9 +1883,8 @@
     }
 
     // ============================================================
-    // ===== 🏯 弹出菜单 + 面板控制 =====
+    // ===== 弹出菜单 + 面板控制 =====
     // ============================================================
-
     function openPanel(type) {
         closeAllPanels();
         if (type === 'tribe') {
@@ -1851,6 +1939,63 @@
     });
 
     // ============================================================
+    // ===== 回合制行动指令 =====
+    // ============================================================
+    async function doAction(action) {
+        const apText = document.getElementById('apDisplay').textContent;
+        const currentAp = parseInt(apText.split('/')[0]);
+        if (currentAp <= 0) {
+            showMsg('⛔ 行动力不足！请结束回合恢复', 'error');
+            return;
+        }
+
+        let url = '';
+        let actionName = '';
+        switch (action) {
+            case 'produceFood': url = '/api/produce/food'; actionName = '产粮'; break;
+            case 'produceWood': url = '/api/produce/wood'; actionName = '伐木'; break;
+            case 'produceIron': url = '/api/produce/iron'; actionName = '采矿'; break;
+            case 'patrol': url = '/api/patrol'; actionName = '巡逻'; break;
+            case 'forge': url = '/api/forge'; actionName = '铸兵'; break;
+            default: return;
+        }
+
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.success) {
+                showMsg(`✅ ${actionName}成功！`, 'success');
+                loadProfile(false);
+            } else {
+                showMsg('❌ ' + data.msg, 'error');
+            }
+        } catch (e) {
+            showMsg('❌ 请求失败', 'error');
+        }
+    }
+
+    async function endTurn() {
+        try {
+            const res = await fetch('/api/endturn', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.success) {
+                showMsg(`✅ ${data.msg}`, 'success');
+                loadProfile(false);
+            } else {
+                showMsg('❌ ' + data.msg, 'error');
+            }
+        } catch (e) {
+            showMsg('❌ 结束回合失败', 'error');
+        }
+    }
+
+    // ============================================================
     // ===== 加载资料 =====
     // ============================================================
     async function loadProfile(showLoadMsg = true) {
@@ -1862,9 +2007,26 @@
                 return showMsg('加载失败', 'error');
             }
             const p = data.data;
-            
+
             document.getElementById('tribeName').textContent = p.tribeName;
             document.getElementById('username').textContent = p.username;
+
+            // 状态栏
+            document.getElementById('monthDisplay').textContent = p.month || 1;
+            document.getElementById('apDisplay').textContent = `${p.actionPoints || 0}/${p.maxActionPoints || 5}`;
+            document.getElementById('foodDisplay').textContent = p.resources.food;
+            document.getElementById('woodDisplay').textContent = p.resources.wood;
+            document.getElementById('ironDisplay').textContent = p.resources.iron;
+            const totalArmy = (p.army?.infantry || 0) + (p.army?.cavalry || 0) + (p.army?.archer || 0);
+            document.getElementById('armyDisplay').textContent = totalArmy;
+            document.getElementById('securityDisplay').textContent = p.security || 80;
+            document.getElementById('weaponDisplay').textContent = p.weapon || 0;
+
+            document.getElementById('monthTitle').textContent = p.month || 1;
+            document.getElementById('apTitle').textContent = p.actionPoints || 0;
+            document.getElementById('maxApTitle').textContent = p.maxActionPoints || 5;
+
+            // 面板数据
             document.getElementById('food').textContent = p.resources.food;
             document.getElementById('wood').textContent = p.resources.wood;
             document.getElementById('iron').textContent = p.resources.iron;
@@ -1874,14 +2036,14 @@
             document.getElementById('infantry').textContent = p.army?.infantry || 0;
             document.getElementById('cavalry').textContent = p.army?.cavalry || 0;
             document.getElementById('archer').textContent = p.army?.archer || 0;
-            
+
             if (p.general) {
                 document.getElementById('generalName').textContent = `⚔️ ${p.general.name}`;
                 document.getElementById('generalForce').textContent = p.general.force;
                 document.getElementById('generalIntelligence').textContent = p.general.intelligence;
                 document.getElementById('generalLeadership').textContent = p.general.leadership;
             }
-            
+
             window._allies = p.allies || [];
 
             const bonusArea = document.getElementById('bonusArea');
@@ -1907,11 +2069,13 @@
         }
     }
 
+    // ===== 登出 =====
     async function logout() {
         await fetch('/api/logout');
         window.location.href = '/';
     }
 
+    // ========== 启动 ==========
     loadProfile();
     setInterval(() => { loadProfile(false); }, 5000);
 </script>
