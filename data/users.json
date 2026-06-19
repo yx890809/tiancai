@@ -5,9 +5,9 @@
       "password": "$2a$10$l1f.qsd7BaW4gZCK/8UvHOWkuPm2jPvEQYOjSd4MIQl4.KpyqtOde",
       "tribeName": "天墟",
       "resources": {
-        "food": 510,
-        "wood": 359,
-        "iron": 45
+        "food": 592,
+        "wood": 707,
+        "iron": 62
       },
       "buildings": {
         "mainCastle": 1,
@@ -15,15 +15,31 @@
         "barracks": 0
       },
       "position": {
-        "x": 0,
-        "y": 2
+        "x": 3,
+        "y": 3
       },
       "createdAt": "2026-06-18T08:00:00.000Z",
-      "lastLogin": "2026-06-18T13:50:46.697Z",
+      "lastLogin": "2026-06-19T07:20:43.643Z",
       "army": {
-        "infantry": 11,
-        "cavalry": 0,
-        "archer": 0
+        "infantry": 110,
+        "cavalry": 89,
+        "archer": 60
+      },
+      "allies": [
+        "yx123"
+      ],
+      "items": {
+        "defendScroll": 10,
+        "scoutScroll": 9,
+        "recruitScroll": 0
+      },
+      "general": {
+        "name": "黄忠",
+        "force": 93,
+        "intelligence": 60,
+        "leadership": 80,
+        "level": 1,
+        "exp": 0
       }
     },
     {
@@ -31,9 +47,9 @@
       "password": "$2a$10$.ze6z61E/YIMRlS7ho89o.ZY4uJGM.RbgDsd3B.KB6DYUqIJ9xqhW",
       "tribeName": "斗罗大陆",
       "resources": {
-        "food": 258,
-        "wood": 301,
-        "iron": 1
+        "food": 312,
+        "wood": 313,
+        "iron": 28
       },
       "buildings": {
         "mainCastle": 1,
@@ -41,15 +57,31 @@
         "barracks": 0
       },
       "position": {
-        "x": 9,
-        "y": 0
+        "x": 3,
+        "y": 6
       },
       "createdAt": "2026-06-18T11:18:57.170Z",
-      "lastLogin": "2026-06-18T12:02:23.195Z",
+      "lastLogin": "2026-06-19T07:38:59.694Z",
       "army": {
         "infantry": 6,
         "cavalry": 2,
         "archer": 0
+      },
+      "allies": [
+        "yx890809"
+      ],
+      "items": {
+        "defendScroll": 0,
+        "scoutScroll": 0,
+        "recruitScroll": 0
+      },
+      "general": {
+        "name": "马超",
+        "force": 97,
+        "intelligence": 54,
+        "leadership": 86,
+        "level": 1,
+        "exp": 0
       }
     },
     {
@@ -57,9 +89,9 @@
       "password": "$2a$10$xT8ZsDL65rGqZCwhoJXveecCpIqzjk7OK4HeP8oyl/SsihdyNnYwS",
       "tribeName": "和平社区",
       "resources": {
-        "food": 91,
+        "food": 121,
         "wood": 403,
-        "iron": 7
+        "iron": 13
       },
       "buildings": {
         "mainCastle": 1,
@@ -67,16 +99,16 @@
         "barracks": 0
       },
       "army": {
-        "infantry": 9,
+        "infantry": 8,
         "cavalry": 2,
-        "archer": 2
+        "archer": 1
       },
       "position": {
-        "x": 9,
-        "y": 5
+        "x": 8,
+        "y": 7
       },
       "createdAt": "2026-06-18T13:25:50.698Z",
-      "lastLogin": "2026-06-18T13:40:29.743Z"
+      "lastLogin": "2026-06-18T16:01:11.906Z"
     }
   ]
 }
