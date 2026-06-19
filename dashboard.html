@@ -144,53 +144,163 @@
         }
         .army-card .recruit-btn:hover { background: #3a2a5a; border-color: #b886ff; }
 
-        /* ===== 排行榜 ===== */
-        .rank-title {
-            margin-top: 15px;
+        /* ===== 🤝 联盟样式 ===== */
+        .alliance-title {
+            margin-top: 10px;
             color: #c0a060;
-            font-size: 16px;
-            border-top: 1px solid #3a2a1a;
-            padding-top: 15px;
+            font-size: 15px;
             text-align: center;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #2a1a12;
         }
-        #rankList {
+        #allianceContainer {
             background: #1a0e08;
             border-radius: 10px;
-            padding: 5px 0;
+            border: 1px solid #3a2a1a;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+        }
+        .alliance-list {
+            min-height: 30px;
+            max-height: 80px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: #f0e0c0;
+        }
+        .alliance-item {
+            display: inline-block;
+            background: #2a1a3a;
+            padding: 2px 12px;
+            border-radius: 12px;
+            margin: 2px 4px 2px 0;
+            font-size: 13px;
+            border: 1px solid #5a3a6a;
+        }
+        .alliance-item .ally-name {
+            color: #7bed9f;
+        }
+        .alliance-empty {
+            color: #5a4a3a;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+        .alliance-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .alliance-actions input {
+            flex: 1;
+            padding: 4px 8px;
+            background: #1a0e08;
+            border: 1px solid #3a2a1a;
+            border-radius: 6px;
+            color: #f0e0c0;
+            font-size: 13px;
+            outline: none;
+        }
+        .alliance-actions input:focus {
+            border-color: #b8860b;
+        }
+        .alliance-actions input::placeholder {
+            color: #5a4a3a;
+            font-size: 12px;
+        }
+        .alliance-actions button {
+            padding: 4px 12px;
+            background: #2a1a3a;
+            border: 1px solid #5a3a6a;
+            border-radius: 6px;
+            color: #f0e0c0;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .alliance-actions button:hover {
+            background: #3a2a5a;
+            border-color: #b886ff;
+        }
+
+        /* ===== 🏪 商店样式 ===== */
+        .shop-title {
+            margin-top: 10px;
+            color: #c0a060;
+            font-size: 15px;
+            text-align: center;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #2a1a12;
+        }
+        #shopContainer {
+            background: #1a0e08;
+            border-radius: 10px;
+            border: 1px solid #3a2a1a;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+        }
+        .shop-items {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .shop-item {
+            background: #0a0a0a;
+            border: 1px solid #3a2a1a;
+            border-radius: 10px;
+            padding: 8px 12px;
+            text-align: center;
+            min-width: 100px;
+            flex: 1;
+            max-width: 150px;
+        }
+        .shop-item .icon { font-size: 24px; }
+        .shop-item .name { font-size: 14px; color: #ffd700; font-weight: bold; }
+        .shop-item .desc { font-size: 11px; color: #8a7a6a; }
+        .shop-item .cost { font-size: 11px; color: #7bed9f; }
+        .shop-item button {
+            margin-top: 4px;
+            padding: 3px 12px;
+            background: #2a1a3a;
+            border: 1px solid #5a3a6a;
+            border-radius: 6px;
+            color: #f0e0c0;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .shop-item button:hover { background: #3a2a5a; border-color: #b886ff; }
+
+        /* 武将显示 */
+        .general-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #1a0e08;
+            border-radius: 10px;
+            padding: 8px 15px;
             margin-bottom: 15px;
             border: 1px solid #3a2a1a;
-            max-height: 160px;
-            overflow-y: auto;
+            flex-wrap: wrap;
         }
-        .rank-header {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 12px;
-            color: #8a7a6a;
-            font-size: 12px;
-            border-bottom: 1px solid #2a1a12;
+        .general-info .avatar {
+            font-size: 28px;
+        }
+        .general-info .details {
+            flex: 1;
+        }
+        .general-info .details .name {
+            color: #ffd700;
             font-weight: bold;
+            font-size: 16px;
         }
-        .rank-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 12px;
-            font-size: 14px;
-            border-bottom: 1px solid #1a0e08;
-            align-items: center;
+        .general-info .details .stats {
+            font-size: 12px;
+            color: #8a7a6a;
         }
-        .rank-item:last-child { border-bottom: none; }
-        .rank-item .pos { color: #ffd700; width: 30px; font-weight: bold; }
-        .rank-item .tribe { color: #f0e0c0; flex: 2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .rank-item .lord { color: #8a7a6a; flex: 1; font-size: 12px; }
-        .rank-item .army { color: #ff6b6b; font-weight: bold; width: 40px; text-align: right; }
-        .rank-item.me { background: #2a1a0a; border-left: 3px solid #ffd700; border-radius: 0 4px 4px 0; }
-        .rank-item .pos.gold { color: #ffd700; }
-        .rank-item .pos.silver { color: #c0c0c0; }
-        .rank-item .pos.bronze { color: #cd7f32; }
-        .rank-empty { text-align: center; color: #5a4a3a; padding: 15px; font-size: 14px; }
+        .general-info .details .stats span {
+            color: #f0e0c0;
+        }
 
-        /* ===== 聊天 ===== */
         .chat-title {
             margin-top: 5px;
             color: #c0a060;
@@ -247,7 +357,6 @@
         }
         .chat-input-row button:hover { background: #daa520; }
         
-        /* ===== 地图 ===== */
         .map-title {
             margin: 10px 0 10px 0;
             color: #c0a060;
@@ -259,38 +368,34 @@
         .map-legend {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            font-size: 12px;
+            gap: 14px;
+            font-size: 11px;
             color: #8a7a6a;
             margin-bottom: 10px;
+            flex-wrap: wrap;
         }
-        .map-legend span { display: flex; align-items: center; gap: 5px; }
+        .map-legend span { display: flex; align-items: center; gap: 4px; }
+        .map-legend .city-icon { color: #ffd700; }
+        .map-legend .mountain-icon { color: #8a7a5a; }
+        .map-legend .water-icon { color: #2a6a8a; }
+        .map-legend .forest-icon { color: #2d5a1a; }
         
         #mapContainer {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 3px;
+            width: 100%;
             max-width: 500px;
             margin: 0 auto;
         }
-        .cell {
+        #mapContainer canvas {
+            width: 100% !important;
+            height: auto !important;
             aspect-ratio: 1 / 1;
-            background: #1a0e08;
-            border: 1px solid #2a1a12;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
+            border-radius: 8px;
+            border: 2px solid #3a2a1a;
             cursor: pointer;
-            transition: 0.2s;
-            color: #5a4a3a;
-            position: relative;
+            background: #1a0e08;
+            display: block;
         }
-        .cell:hover { background: #2a1a12; border-color: #b8860b; transform: scale(1.05); z-index: 10; }
-        .cell.player { border-color: #ffd700; background: #2a1a0a; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); color: #ffd700; font-size: 24px; }
-        .cell.other { border-color: #4a6a8a; color: #4a8ab8; background: #0a1a2a; }
-        .cell.other:hover { border-color: #ff4444; box-shadow: 0 0 20px rgba(255, 68, 68, 0.3); }
+        
         .position-info { text-align: center; color: #8a7a6a; font-size: 13px; margin-top: 8px; }
 
         .msg-box {
@@ -308,7 +413,7 @@
         .msg-box.error { border-left-color: #ff6b6b; color: #ff6b6b; }
         .msg-box.battle { border-left-color: #ff4444; color: #ff6b6b; }
 
-        /* ===== 🎬 战斗弹窗（带动画） ===== */
+        /* ===== 🎬 战斗弹窗 ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -323,26 +428,35 @@
             background: #2c1810;
             border: 2px solid #b8860b;
             border-radius: 20px;
-            padding: 25px 30px;
+            padding: 20px 22px;
             max-width: 520px;
             width: 92%;
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 0 50px rgba(184, 134, 11, 0.3);
         }
-        .modal h2 { color: #ffd700; text-align: center; margin-bottom: 15px; font-size: 22px; }
+        .modal h2 { color: #ffd700; text-align: center; margin-bottom: 10px; font-size: 20px; }
         .modal .target-info {
             text-align: center;
             color: #c0a060;
-            font-size: 15px;
-            margin-bottom: 12px;
+            font-size: 14px;
+            margin-bottom: 10px;
         }
         
-        /* 兵力条 */
+        #particleCanvas {
+            width: 100%;
+            height: 180px;
+            background: #0a0a0a;
+            border-radius: 12px;
+            border: 1px solid #3a2a1a;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
         .army-bars {
             display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 12px;
             justify-content: center;
         }
         .army-bar-group {
@@ -350,20 +464,15 @@
             text-align: center;
         }
         .army-bar-group .label {
-            font-size: 13px;
+            font-size: 12px;
             color: #8a7a6a;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
-        .army-bar-group .label .name {
-            font-weight: bold;
-            color: #f0e0c0;
-        }
-        .army-bar-group .label .total {
-            color: #ffd700;
-        }
+        .army-bar-group .label .name { font-weight: bold; color: #f0e0c0; }
+        .army-bar-group .label .total { color: #ffd700; }
         .army-bar-track {
             width: 100%;
-            height: 20px;
+            height: 16px;
             background: #1a0e08;
             border-radius: 10px;
             overflow: hidden;
@@ -383,24 +492,23 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             color: #fff;
             text-shadow: 0 1px 4px rgba(0,0,0,0.8);
         }
         
-        /* 战斗日志（动画区） */
         .battle-log-area {
             background: #1a0e08;
             border-radius: 10px;
-            padding: 12px 15px;
-            margin: 12px 0;
-            min-height: 80px;
-            max-height: 180px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            min-height: 60px;
+            max-height: 120px;
             overflow-y: auto;
             border: 1px solid #2a1a12;
-            font-size: 14px;
-            line-height: 1.8;
+            font-size: 13px;
+            line-height: 1.7;
         }
         .battle-log-area .log-entry {
             padding: 2px 0;
@@ -415,16 +523,14 @@
         }
         .battle-log-area .log-entry .highlight-a { color: #ff6b6b; font-weight: bold; }
         .battle-log-area .log-entry .highlight-d { color: #4a8ab8; font-weight: bold; }
-        .battle-log-area .log-entry .highlight-win { color: #7bed9f; font-weight: bold; }
-        .battle-log-area .log-entry .highlight-lose { color: #ff6b6b; font-weight: bold; }
         .battle-log-area .log-entry .info { color: #c0a060; }
         
         .battle-result-area {
             text-align: center;
-            font-size: 18px;
-            padding: 10px;
+            font-size: 17px;
+            padding: 8px;
             border-radius: 10px;
-            margin: 10px 0;
+            margin: 8px 0;
             display: none;
         }
         .battle-result-area.victory { display: block; color: #7bed9f; background: #1a2a1a; border: 1px solid #7bed9f; }
@@ -433,14 +539,14 @@
         .modal .btn-group {
             display: flex;
             gap: 12px;
-            margin-top: 15px;
+            margin-top: 12px;
         }
         .modal .btn-group button {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             transition: 0.3s;
             font-weight: bold;
@@ -469,174 +575,79 @@
         .battle-status {
             text-align: center;
             color: #c0a060;
-            font-size: 14px;
-            margin: 5px 0 10px 0;
-            min-height: 24px;
+            font-size: 13px;
+            margin: 5px 0 8px 0;
+            min-height: 20px;
         }
-        .battle-status .loading-dots::after {
-            content: '';
-            animation: dots 1.2s steps(4, end) infinite;
+
+        .siege-result-area {
+            text-align: center;
+            font-size: 17px;
+            padding: 8px;
+            border-radius: 10px;
+            margin: 8px 0;
+            display: none;
         }
-        @keyframes dots {
-            0% { content: ''; }
-            25% { content: '.'; }
-            50% { content: '..'; }
-            75% { content: '...'; }
-            100% { content: ''; }
-        }
-        .battle-status .loading-dots::after {
-            content: '...';
-            animation: dots 1.2s steps(4, end) infinite;
-        }
+        .siege-result-area.victory { display: block; color: #7bed9f; background: #1a2a1a; border: 1px solid #7bed9f; }
+        .siege-result-area.defeat { display: block; color: #ff6b6b; background: #2a1a1a; border: 1px solid #ff6b6b; }
+
         /* ===== 📱 移动端适配 ===== */
-@media (max-width: 600px) {
-    .container {
-        padding: 12px;
-    }
-    .header h1 {
-        font-size: 18px;
-    }
-    .header .sub {
-        font-size: 12px;
-    }
-    .resources {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-    }
-    .resource-card {
-        padding: 8px;
-    }
-    .resource-card .icon {
-        font-size: 18px;
-    }
-    .resource-card .value {
-        font-size: 18px;
-    }
-    .resource-card button {
-        font-size: 10px;
-        padding: 3px 8px;
-    }
-    .buildings {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-    }
-    .building-card {
-        padding: 8px;
-    }
-    .building-card .icon {
-        font-size: 18px;
-    }
-    .building-card .level {
-        font-size: 16px;
-    }
-    .army {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-    }
-    .army-card {
-        padding: 8px;
-    }
-    .army-card .icon {
-        font-size: 18px;
-    }
-    .army-card .count {
-        font-size: 18px;
-    }
-    .army-card .recruit-btn {
-        font-size: 10px;
-        padding: 3px 8px;
-    }
-    #mapContainer {
-        gap: 2px;
-        max-width: 100%;
-    }
-    .cell {
-        font-size: 14px;
-        border-radius: 3px;
-    }
-    .cell.player {
-        font-size: 18px;
-    }
-    .rank-item {
-        font-size: 12px;
-        padding: 3px 8px;
-    }
-    .rank-item .tribe {
-        font-size: 11px;
-    }
-    .rank-item .lord {
-        font-size: 10px;
-    }
-    .rank-header {
-        font-size: 10px;
-        padding: 4px 8px;
-    }
-    #chatContainer {
-        max-height: 80px;
-        font-size: 12px;
-        padding: 6px 8px;
-    }
-    .chat-input-row input {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
-    .chat-input-row button {
-        font-size: 12px;
-        padding: 6px 12px;
-    }
-    .modal {
-        padding: 15px 18px;
-        max-width: 95%;
-    }
-    .modal h2 {
-        font-size: 18px;
-    }
-    .battle-log-area {
-        font-size: 12px;
-        max-height: 120px;
-        padding: 8px 10px;
-    }
-    .army-bar-track {
-        height: 14px;
-    }
-    .army-bar-text {
-        font-size: 9px;
-    }
-    .bonus-box {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
-    .msg-box {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-    .map-legend {
-        font-size: 10px;
-        gap: 10px;
-    }
-    .map-legend span {
-        font-size: 10px;
-    }
-    .logout-btn {
-        font-size: 12px;
-        padding: 4px 12px;
-    }
-    .position-info {
-        font-size: 11px;
-    }
-    .rank-title {
-        font-size: 14px;
-    }
-    .chat-title {
-        font-size: 13px;
-    }
-    .map-title {
-        font-size: 14px;
-    }
-    .army-title {
-        font-size: 14px;
-    }
-}
+        @media (max-width: 600px) {
+            .container { padding: 12px; }
+            .header h1 { font-size: 18px; }
+            .header .sub { font-size: 12px; }
+            .resources { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .resource-card { padding: 8px; }
+            .resource-card .icon { font-size: 18px; }
+            .resource-card .value { font-size: 18px; }
+            .resource-card button { font-size: 10px; padding: 3px 8px; }
+            .buildings { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .building-card { padding: 8px; }
+            .building-card .icon { font-size: 18px; }
+            .building-card .level { font-size: 16px; }
+            .army { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .army-card { padding: 8px; }
+            .army-card .icon { font-size: 18px; }
+            .army-card .count { font-size: 18px; }
+            .army-card .recruit-btn { font-size: 10px; padding: 3px 8px; }
+            #mapContainer canvas { border-radius: 6px; }
+            .rank-item { font-size: 12px; padding: 3px 8px; }
+            .rank-item .tribe { font-size: 11px; }
+            .rank-item .lord { font-size: 10px; }
+            .rank-header { font-size: 10px; padding: 4px 8px; }
+            #chatContainer { max-height: 80px; font-size: 12px; padding: 6px 8px; }
+            .chat-input-row input { font-size: 12px; padding: 6px 10px; }
+            .chat-input-row button { font-size: 12px; padding: 6px 12px; }
+            .modal { padding: 15px 16px; max-width: 95%; }
+            .modal h2 { font-size: 18px; }
+            #particleCanvas { height: 130px; }
+            .battle-log-area { font-size: 12px; max-height: 100px; padding: 6px 10px; }
+            .army-bar-track { height: 14px; }
+            .army-bar-text { font-size: 9px; }
+            .bonus-box { font-size: 12px; padding: 6px 10px; }
+            .msg-box { font-size: 12px; padding: 8px 12px; }
+            .map-legend { font-size: 10px; gap: 8px; }
+            .map-legend span { font-size: 10px; }
+            .logout-btn { font-size: 12px; padding: 4px 12px; }
+            .position-info { font-size: 11px; }
+            .rank-title { font-size: 14px; }
+            .chat-title { font-size: 13px; }
+            .map-title { font-size: 14px; }
+            .army-title { font-size: 14px; }
+            .alliance-title { font-size: 13px; }
+            #allianceContainer { padding: 6px 8px; }
+            .alliance-actions input { font-size: 12px; padding: 3px 6px; }
+            .alliance-actions button { font-size: 11px; padding: 3px 8px; }
+            .shop-title { font-size: 13px; }
+            .shop-item { min-width: 80px; max-width: 120px; padding: 6px 8px; }
+            .shop-item .icon { font-size: 20px; }
+            .shop-item .name { font-size: 12px; }
+            .shop-item .desc { font-size: 10px; }
+            .general-info { padding: 6px 10px; }
+            .general-info .avatar { font-size: 22px; }
+            .general-info .details .name { font-size: 14px; }
+            .general-info .details .stats { font-size: 11px; }
+        }
     </style>
 </head>
 <body>
@@ -712,7 +723,23 @@
         </div>
     </div>
 
-    <!-- ===== 排行榜 ===== -->
+    <!-- ===== ⭐ 武将信息 ===== -->
+    <div class="general-info" id="generalInfo">
+        <div class="avatar">⚔️</div>
+        <div class="details">
+            <div class="name" id="generalName">加载中...</div>
+            <div class="stats">武力 <span id="generalForce">-</span> | 智力 <span id="generalIntelligence">-</span> | 统率 <span id="generalLeadership">-</span></div>
+        </div>
+    </div>
+
+    <!-- ===== 🏪 商店系统 ===== -->
+    <div class="shop-title">🏪 商店</div>
+    <div id="shopContainer">
+        <div class="shop-items" id="shopItems">
+            <div style="color:#5a4a3a;text-align:center;padding:10px;width:100%;">⏳ 加载商店...</div>
+        </div>
+    </div>
+
     <div class="rank-title">🏆 诸侯排行榜（按总兵力）</div>
     <div id="rankList">
         <div class="rank-header">
@@ -724,19 +751,35 @@
         <div id="rankItems"><div class="rank-empty">⏳ 加载中...</div></div>
     </div>
 
-    <!-- ===== 聊天 ===== -->
+    <!-- ===== 🤝 联盟系统 ===== -->
+    <div class="alliance-title">🤝 我的联盟</div>
+    <div id="allianceContainer">
+        <div id="allianceList" class="alliance-list">
+            <div class="alliance-empty">暂无盟友，去结交诸侯吧！</div>
+        </div>
+        <div class="alliance-actions">
+            <input type="text" id="allianceInput" placeholder="输入对方主公名..." maxlength="20">
+            <button onclick="requestAlliance()">结盟</button>
+            <button onclick="breakAlliance()" style="background:#5a2a1a;">解除</button>
+        </div>
+    </div>
+
     <div class="chat-title">💬 天下议事厅</div>
     <div id="chatContainer"><div style="color:#5a4a3a;text-align:center;padding:10px;">⏳ 加载聊天记录...</div></div>
     <div class="chat-input-row">
         <input type="text" id="chatInput" placeholder="说点什么..." maxlength="200" onkeydown="if(event.key==='Enter') sendChat()">
         <button onclick="sendChat()">发送</button>
+        <button onclick="useScout()" style="background:#2a1a3a;border:1px solid #5a3a6a;">🔍 侦查</button>
     </div>
 
-    <div class="map-title">🗺️ 世界地图（点击 🚩 可攻击）</div>
+    <div class="map-title">🗺️ 世界地图（🏰城池 | 🚩玩家 | ⛰️山/🌊水不可通行）</div>
     <div class="map-legend">
         <span>🏯 你</span>
-        <span>🚩 其他部落（点击攻击）</span>
-        <span>⚔️ 多人聚集</span>
+        <span>🚩 其他玩家</span>
+        <span class="city-icon">🏰 城池</span>
+        <span class="mountain-icon">⛰️ 山（不可通行）</span>
+        <span class="water-icon">🌊 水（不可通行）</span>
+        <span class="forest-icon">🌳 森林（减速）</span>
     </div>
     <div id="mapContainer"></div>
     <div class="position-info" id="positionInfo">📍 当前位置：加载中...</div>
@@ -751,8 +794,7 @@
     <div class="modal">
         <h2>⚔️ 两军交战</h2>
         <div class="target-info" id="battleTarget">准备攻击...</div>
-        
-        <!-- 兵力条 -->
+        <canvas id="particleCanvas"></canvas>
         <div class="army-bars">
             <div class="army-bar-group">
                 <div class="label"><span class="name" style="color:#ff6b6b;">⚔️ 攻击方</span> <span class="total" id="attackerTotalLabel">0</span></div>
@@ -769,15 +811,9 @@
                 </div>
             </div>
         </div>
-        
         <div class="battle-status" id="battleStatus">⚔️ 点击 "进攻！" 开始战斗</div>
-        
-        <div class="battle-log-area" id="battleLogArea">
-            <div style="color:#5a4a3a;text-align:center;padding:10px;">等待出征...</div>
-        </div>
-        
+        <div class="battle-log-area" id="battleLogArea"><div style="color:#5a4a3a;text-align:center;padding:10px;">等待出征...</div></div>
         <div class="battle-result-area" id="battleResult"></div>
-        
         <div class="btn-group" id="battleButtons">
             <button class="btn-attack" onclick="startBattle()">⚔️ 进攻！</button>
             <button class="btn-cancel" onclick="closeBattleModal()">取消</button>
@@ -788,14 +824,32 @@
     </div>
 </div>
 
+<!-- ===== 🏰 攻城弹窗 ===== -->
+<div class="modal-overlay" id="siegeModal">
+    <div class="modal">
+        <h2>🏰 攻城战</h2>
+        <div class="target-info" id="siegeTarget">准备攻城...</div>
+        <div class="siege-result-area" id="siegeResult"></div>
+        <div class="btn-group" id="siegeButtons">
+            <button class="btn-attack" onclick="confirmSiege()">⚔️ 攻城！</button>
+            <button class="btn-cancel" onclick="closeSiegeModal()">取消</button>
+        </div>
+        <div class="btn-group" id="siegeCloseBtn" style="display:none;">
+            <button class="btn-close" onclick="closeSiegeModal()">关闭</button>
+        </div>
+    </div>
+</div>
 <script>
     // ===== 全局变量 =====
     let battleTarget = null;
     let battleData = null;
     let battleTimer = null;
     let battleStep = 0;
+    let particleAnimId = null;
+    let siegeTarget = null;
+    let currentCities = [];
+    let currentTerrain = [];
 
-    // ===== 工具函数 =====
     function showMsg(text, type = 'info') {
         const box = document.getElementById('msgBox');
         const textEl = document.getElementById('msgText');
@@ -806,82 +860,493 @@
         textEl.textContent = text;
     }
 
-    // ===== 渲染地图 =====
-    function renderMap(currentX, currentY, allPlayers) {
+    // ============================================================
+    // ===== 💥 粒子引擎 =====
+    // ============================================================
+    let particles = [];
+    let particleCtx = null;
+    let particleCanvas = null;
+    let particleRunning = false;
+
+    function initParticleCanvas() {
+        const canvas = document.getElementById('particleCanvas');
+        const container = canvas.parentElement;
+        const width = container.clientWidth - 44;
+        canvas.width = Math.min(width, 480);
+        canvas.height = 180;
+        particleCanvas = canvas;
+        particleCtx = canvas.getContext('2d');
+    }
+
+    class Particle {
+        constructor(x, y, type) {
+            this.x = x;
+            this.y = y;
+            this.type = type || 'fire';
+            this.life = 1.0;
+            this.decay = 0.008 + Math.random() * 0.015;
+            
+            if (this.type === 'fire') {
+                this.vx = (Math.random() - 0.5) * 6;
+                this.vy = -Math.random() * 4 - 1;
+                this.size = 4 + Math.random() * 8;
+                this.color = `hsl(${20 + Math.random() * 30}, 100%, ${50 + Math.random() * 30}%)`;
+            } else if (this.type === 'spark') {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 2 + Math.random() * 6;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed - 1;
+                this.size = 2 + Math.random() * 4;
+                this.color = `hsl(${40 + Math.random() * 20}, 100%, ${70 + Math.random() * 20}%)`;
+            } else if (this.type === 'smoke') {
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = -Math.random() * 1.5 - 0.5;
+                this.size = 10 + Math.random() * 20;
+                this.color = `rgba(150, 150, 150, ${0.3 + Math.random() * 0.3})`;
+            } else if (this.type === 'shockwave') {
+                this.vx = 0;
+                this.vy = 0;
+                this.size = 5;
+                this.maxSize = 40 + Math.random() * 30;
+                this.color = `rgba(255, 200, 100, ${0.6 + Math.random() * 0.3})`;
+                this.isShockwave = true;
+            }
+        }
+
+        update() {
+            if (this.isShockwave) {
+                this.size += 1.5;
+                this.life = 1 - (this.size / this.maxSize);
+                return this.life > 0;
+            }
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vy += 0.05;
+            this.life -= this.decay;
+            this.size *= 0.995;
+            return this.life > 0 && this.size > 0.5;
+        }
+
+        draw(ctx) {
+            if (this.isShockwave) {
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2 * this.life;
+                ctx.globalAlpha = this.life * 0.6;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+                return;
+            }
+            ctx.globalAlpha = this.life;
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    function spawnExplosion(cx, cy) {
+        for (let i = 0; i < 40; i++) particles.push(new Particle(cx, cy, 'fire'));
+        for (let i = 0; i < 30; i++) particles.push(new Particle(cx, cy, 'spark'));
+        for (let i = 0; i < 15; i++) particles.push(new Particle(cx, cy, 'smoke'));
+        for (let i = 0; i < 3; i++) {
+            const wave = new Particle(cx, cy, 'shockwave');
+            wave.maxSize = 50 + Math.random() * 30;
+            wave.color = `rgba(255, 200, 100, ${0.4 + Math.random() * 0.3})`;
+            particles.push(wave);
+        }
+    }
+
+    function animateParticles() {
+        if (!particleCtx || !particleCanvas) return;
+        const ctx = particleCtx;
+        const canvas = particleCanvas;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(10, 10, 15, 1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(30, 20, 15, 0.5)';
+        ctx.fillRect(0, canvas.height - 10, canvas.width, 10);
+        particles = particles.filter(p => p.update());
+        particles.forEach(p => p.draw(ctx));
+        if (particles.length > 0 || particleRunning) {
+            particleAnimId = requestAnimationFrame(animateParticles);
+        } else {
+            particleRunning = false;
+            ctx.fillStyle = 'rgba(10, 10, 15, 1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(30, 20, 15, 0.5)';
+            ctx.fillRect(0, canvas.height - 10, canvas.width, 10);
+            ctx.fillStyle = '#5a4a3a';
+            ctx.font = '16px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('⚔️ 战斗结束', canvas.width / 2, canvas.height / 2);
+        }
+    }
+
+    function triggerExplosion() {
+        if (!particleCanvas) return;
+        const cx = particleCanvas.width / 2 + (Math.random() - 0.5) * 40;
+        const cy = particleCanvas.height / 2 + (Math.random() - 0.5) * 30;
+        spawnExplosion(cx, cy);
+        if (!particleRunning) {
+            particleRunning = true;
+            animateParticles();
+        }
+    }
+
+    // ============================================================
+    // ===== 🗺️ 渲染地图 =====
+    // ============================================================
+    function renderMap(currentX, currentY, allPlayers, cities, terrain) {
+        currentCities = cities || [];
+        currentTerrain = terrain || [];
+
         const container = document.getElementById('mapContainer');
         container.innerHTML = '';
 
-        const playerMap = {};
+        const canvas = document.createElement('canvas');
+        const containerWidth = container.clientWidth || 350;
+        const size = Math.min(containerWidth, 500);
+        canvas.width = size;
+        canvas.height = size;
+        canvas.style.width = '100%';
+        canvas.style.height = 'auto';
+        canvas.style.aspectRatio = '1 / 1';
+        canvas.style.cursor = 'pointer';
+        canvas.style.borderRadius = '8px';
+        canvas.style.border = '2px solid #3a2a1a';
+        container.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        const gridSize = 10;
+        const cellSize = canvas.width / gridSize;
+
+        const terrainData = terrain && terrain.length > 0 ? terrain : generateDefaultTerrain();
+
+        for (let y = 0; y < gridSize; y++) {
+            for (let x = 0; x < gridSize; x++) {
+                const px = x * cellSize;
+                const py = y * cellSize;
+                const type = terrainData[y]?.[x] || 'grass';
+
+                let color;
+                switch (type) {
+                    case 'grass': color = '#4a8a3a'; break;
+                    case 'forest': color = '#2d5a1a'; break;
+                    case 'mountain': color = '#8a7a5a'; break;
+                    case 'water': color = '#2a6a8a'; break;
+                    default: color = '#4a8a3a';
+                }
+                ctx.fillStyle = color;
+                ctx.fillRect(px, py, cellSize, cellSize);
+
+                if (cellSize > 18) {
+                    ctx.font = `${cellSize * 0.5}px sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    if (type === 'mountain') {
+                        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+                        ctx.fillText('⛰️', px + cellSize / 2, py + cellSize / 2);
+                    } else if (type === 'water') {
+                        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+                        ctx.fillText('🌊', px + cellSize / 2, py + cellSize / 2);
+                    } else if (type === 'forest') {
+                        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+                        ctx.fillText('🌳', px + cellSize / 2, py + cellSize / 2);
+                    }
+                }
+
+                ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                ctx.lineWidth = 0.5;
+                ctx.strokeRect(px, py, cellSize, cellSize);
+            }
+        }
+
+        // 绘制城池
+        if (cities && cities.length > 0) {
+            cities.forEach(city => {
+                const px = city.x * cellSize + cellSize / 2;
+                const py = city.y * cellSize + cellSize / 2;
+                const radius = cellSize * 0.35;
+
+                const glow = ctx.createRadialGradient(px, py, 0, px, py, radius * 2);
+                glow.addColorStop(0, 'rgba(255, 215, 0, 0.2)');
+                glow.addColorStop(1, 'rgba(255, 215, 0, 0)');
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(px, py, radius * 2, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.font = `${cellSize * 0.6}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = city.owner ? '#ff6b6b' : '#ffd700';
+                ctx.fillText('🏰', px, py - cellSize * 0.05);
+
+                ctx.fillStyle = '#fff';
+                ctx.font = `bold ${Math.max(cellSize * 0.25, 10)}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillText(city.name, px, py + cellSize * 0.35);
+
+                if (city.ownerName) {
+                    ctx.fillStyle = '#c0a060';
+                    ctx.font = `${Math.max(cellSize * 0.18, 8)}px sans-serif`;
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText(city.ownerName, px, py - cellSize * 0.45);
+                } else {
+                    ctx.fillStyle = '#5a7a3a';
+                    ctx.font = `${Math.max(cellSize * 0.18, 8)}px sans-serif`;
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText('空城', px, py - cellSize * 0.45);
+                }
+            });
+        }
+
+        // 收集玩家位置
+        const playerPositions = {};
         if (allPlayers) {
             allPlayers.forEach(p => {
                 if (p.position && p.position.x !== undefined && p.position.y !== undefined) {
-                    if (p.position.x >= 0 && p.position.y >= 0) {
+                    if (p.position.x >= 0 && p.position.x < gridSize && p.position.y >= 0 && p.position.y < gridSize) {
                         const key = `${p.position.x},${p.position.y}`;
-                        if (!playerMap[key]) playerMap[key] = [];
-                        playerMap[key].push(p);
+                        if (!playerPositions[key]) playerPositions[key] = [];
+                        playerPositions[key].push(p);
                     }
                 }
             });
         }
 
-        for (let y = 0; y < 10; y++) {
-            for (let x = 0; x < 10; x++) {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                cell.dataset.x = x;
-                cell.dataset.y = y;
-
-                const key = `${x},${y}`;
-                const isMe = (x === currentX && y === currentY);
-                const others = playerMap[key] || [];
-
-                if (isMe) {
-                    cell.classList.add('player');
-                    cell.textContent = '🏯'; 
-                    cell.title = '你的部落';
-                    cell.addEventListener('click', function() {
-                        showMsg('📍 这是你的位置，不能攻击自己', 'error');
-                    });
-                } else if (others.length > 0) {
-                    cell.classList.add('other');
-                    if (others.length === 1) {
-                        cell.textContent = '🚩'; 
-                        cell.title = `点击攻击 ${others[0].tribeName} (${others[0].username})`;
-                        cell.addEventListener('click', function() {
-                            openBattleModal(others[0]);
-                        });
-                    } else {
-                        cell.textContent = '⚔️'; 
-                        cell.title = `${others.length}位诸侯在此聚集`;
-                        cell.addEventListener('click', function() {
-                            let names = others.map(p => `${p.tribeName}(${p.username})`).join('、');
-                            showMsg(`⚔️ 这里有 ${others.length} 位诸侯：${names}，请点击单个旗子选择目标`, 'battle');
-                        });
-                    }
-                } else {
-                    cell.textContent = '';
-                    cell.title = `(${x}, ${y})`;
-                    cell.addEventListener('click', function() {
-                        const targetX = parseInt(this.dataset.x);
-                        const targetY = parseInt(this.dataset.y);
-                        moveTo(targetX, targetY);
-                    });
-                }
-
-                container.appendChild(cell);
+        // 绘制其他玩家
+        for (const key in playerPositions) {
+            const [x, y] = key.split(',').map(Number);
+            if (x === currentX && y === currentY) continue;
+            const players = playerPositions[key];
+            const px = x * cellSize + cellSize / 2;
+            const py = y * cellSize + cellSize / 2;
+            const radius = Math.min(cellSize * 0.25, 10);
+            ctx.fillStyle = '#4a8ab8';
+            ctx.font = `${cellSize * 0.5}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🚩', px, py);
+            if (players.length > 1) {
+                ctx.fillStyle = '#ff6b6b';
+                ctx.font = `${Math.max(cellSize * 0.25, 10)}px sans-serif`;
+                ctx.fillText(`×${players.length}`, px + cellSize * 0.35, py - cellSize * 0.3);
             }
+        }
+
+        // 绘制自己
+        if (currentX !== undefined && currentY !== undefined) {
+            const px = currentX * cellSize + cellSize / 2;
+            const py = currentY * cellSize + cellSize / 2;
+            const radius = Math.min(cellSize * 0.35, 14);
+            const glow = ctx.createRadialGradient(px, py, 0, px, py, radius * 2.5);
+            glow.addColorStop(0, 'rgba(255, 215, 0, 0.3)');
+            glow.addColorStop(0.5, 'rgba(255, 215, 0, 0.08)');
+            glow.addColorStop(1, 'rgba(255, 215, 0, 0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(px, py, radius * 2.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.font = `${cellSize * 0.6}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🏯', px, py);
+            if (cellSize > 20) {
+                ctx.fillStyle = '#ffd700';
+                ctx.font = `bold ${Math.max(cellSize * 0.2, 10)}px sans-serif`;
+                ctx.textBaseline = 'bottom';
+                ctx.fillText('你', px, py + radius * 0.6);
+            }
+        }
+
+        // 点击交互
+        canvas.addEventListener('click', function(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const mouseX = (e.clientX - rect.left) * scaleX;
+            const mouseY = (e.clientY - rect.top) * scaleY;
+            const gridX = Math.floor(mouseX / cellSize);
+            const gridY = Math.floor(mouseY / cellSize);
+            if (gridX < 0 || gridX >= gridSize || gridY < 0 || gridY >= gridSize) return;
+
+            const key = `${gridX},${gridY}`;
+            const isMe = (gridX === currentX && gridY === currentY);
+            const terrainType = terrainData[gridY]?.[gridX] || 'grass';
+
+            const city = currentCities.find(c => c.x === gridX && c.y === gridY);
+            if (city) {
+                if (city.owner === document.getElementById('username').textContent) {
+                    showMsg(`🏰 ${city.name} 是你的城池！`, 'success');
+                    return;
+                }
+                if (city.owner) {
+                    openSiegeModal(city);
+                    return;
+                }
+                moveTo(gridX, gridY);
+                return;
+            }
+
+            if (terrainType === 'mountain' || terrainType === 'water') {
+                showMsg('⛰️ 此处地形无法通行！', 'error');
+                return;
+            }
+
+            if (isMe) {
+                showMsg('📍 这是你的位置', 'error');
+                return;
+            }
+
+            if (playerPositions[key] && playerPositions[key].length > 0) {
+                const target = playerPositions[key][0];
+                openBattleModal(target);
+            } else {
+                moveTo(gridX, gridY);
+            }
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const mouseX = (e.clientX - rect.left) * scaleX;
+            const mouseY = (e.clientY - rect.top) * scaleY;
+            const gridX = Math.floor(mouseX / cellSize);
+            const gridY = Math.floor(mouseY / cellSize);
+            if (gridX < 0 || gridX >= gridSize || gridY < 0 || gridY >= gridSize) {
+                canvas.style.cursor = 'default';
+                document.getElementById('positionInfo').textContent = `📍 当前位置：(${currentX}, ${currentY})`;
+                return;
+            }
+            const terrainType = terrainData[gridY]?.[gridX] || 'grass';
+            const city = currentCities.find(c => c.x === gridX && c.y === gridY);
+            const isMe = (gridX === currentX && gridY === currentY);
+            let info = `📍 (${gridX}, ${gridY})`;
+            if (city) {
+                info += ` 🏰 ${city.name}`;
+                if (city.ownerName) info += ` (${city.ownerName}占领)`;
+                else info += ' (空城)';
+                canvas.style.cursor = 'pointer';
+            } else if (isMe) {
+                info += ' 🏯 你的位置';
+                canvas.style.cursor = 'default';
+            } else if (terrainType === 'mountain') {
+                info += ' ⛰️ 山（不可通行）';
+                canvas.style.cursor = 'default';
+            } else if (terrainType === 'water') {
+                info += ' 🌊 水（不可通行）';
+                canvas.style.cursor = 'default';
+            } else {
+                canvas.style.cursor = 'pointer';
+            }
+            document.getElementById('positionInfo').textContent = info;
+        });
+
+        document.getElementById('positionInfo').textContent = `📍 当前位置：(${currentX}, ${currentY})`;
+    }
+
+    function generateDefaultTerrain() {
+        const size = 10;
+        const terrain = [];
+        function seededRandom(seed) {
+            let s = seed;
+            return function() {
+                s = (s * 9301 + 49297) % 233280;
+                return s / 233280;
+            };
+        }
+        const rng = seededRandom(42);
+        for (let y = 0; y < size; y++) {
+            terrain[y] = [];
+            for (let x = 0; x < size; x++) {
+                if (x === 0 || x === size - 1 || y === 0 || y === size - 1) {
+                    terrain[y][x] = 'mountain';
+                } else {
+                    const val = rng();
+                    if (val < 0.15) terrain[y][x] = 'water';
+                    else if (val < 0.35) terrain[y][x] = 'mountain';
+                    else if (val < 0.55) terrain[y][x] = 'forest';
+                    else terrain[y][x] = 'grass';
+                }
+            }
+        }
+        return terrain;
+    }
+
+    // ============================================================
+    // ===== 🏰 攻城系统 =====
+    // ============================================================
+    function openSiegeModal(city) {
+        siegeTarget = city;
+        document.getElementById('siegeTarget').innerHTML = `
+            🎯 目标：${city.name}
+            <br><span style="font-size:13px;color:#8a7a6a;">位置：(${city.x}, ${city.y}) | 占领者：${city.ownerName || '无'}</span>
+            <br><span style="font-size:13px;color:#ff6b6b;">⚔️ 守城方兵力 × ${city.defense || 1.3} 防御加成</span>
+        `;
+        document.getElementById('siegeResult').className = 'siege-result-area';
+        document.getElementById('siegeResult').textContent = '';
+        document.getElementById('siegeButtons').style.display = 'flex';
+        document.getElementById('siegeCloseBtn').style.display = 'none';
+        document.getElementById('siegeModal').classList.add('active');
+    }
+
+    function closeSiegeModal() {
+        document.getElementById('siegeModal').classList.remove('active');
+        siegeTarget = null;
+    }
+
+    async function confirmSiege() {
+        if (!siegeTarget) return;
+        document.querySelector('#siegeModal .btn-attack').disabled = true;
+        document.querySelector('#siegeModal .btn-attack').textContent = '⏳ 攻城进行中...';
+
+        try {
+            const res = await fetch('/api/siege', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cityId: siegeTarget.id })
+            });
+            const data = await res.json();
+
+            const resultEl = document.getElementById('siegeResult');
+            if (data.success) {
+                resultEl.className = 'siege-result-area victory';
+                resultEl.innerHTML = `🎉 ${data.msg}`;
+            } else {
+                resultEl.className = 'siege-result-area defeat';
+                resultEl.innerHTML = `💀 ${data.msg}`;
+            }
+            document.getElementById('siegeButtons').style.display = 'none';
+            document.getElementById('siegeCloseBtn').style.display = 'flex';
+            document.querySelector('#siegeModal .btn-attack').disabled = false;
+            document.querySelector('#siegeModal .btn-attack').textContent = '⚔️ 攻城！';
+            loadProfile(true);
+        } catch (e) {
+            document.getElementById('siegeResult').className = 'siege-result-area defeat';
+            document.getElementById('siegeResult').innerHTML = '❌ 攻城请求失败';
+            document.querySelector('#siegeModal .btn-attack').disabled = false;
+            document.querySelector('#siegeModal .btn-attack').textContent = '⚔️ 攻城！';
         }
     }
 
-    // ===== 打开战斗弹窗 =====
+    // ============================================================
+    // ===== ⚔️ 战斗系统 =====
+    // ============================================================
     function openBattleModal(target) {
         battleTarget = target;
         battleData = null;
         battleStep = 0;
-        if (battleTimer) {
-            clearInterval(battleTimer);
-            battleTimer = null;
-        }
+        if (battleTimer) { clearInterval(battleTimer); battleTimer = null; }
+        if (particleAnimId) { cancelAnimationFrame(particleAnimId); particleAnimId = null; }
+        particles = [];
+        particleRunning = false;
 
         document.getElementById('battleTarget').innerHTML = `
             🎯 目标：${target.tribeName}（${target.username}）
@@ -893,45 +1358,57 @@
         document.getElementById('battleStatus').textContent = '⚔️ 点击 "进攻！" 开始战斗';
         document.getElementById('battleButtons').style.display = 'flex';
         document.getElementById('battleCloseBtn').style.display = 'none';
-        document.querySelector('.btn-attack').disabled = false;
-        document.querySelector('.btn-attack').textContent = '⚔️ 进攻！';
-        
-        // 重置兵力条
+        document.querySelector('#battleModal .btn-attack').disabled = false;
+        document.querySelector('#battleModal .btn-attack').textContent = '⚔️ 进攻！';
         document.getElementById('attackerBar').style.width = '100%';
         document.getElementById('defenderBar').style.width = '100%';
         document.getElementById('attackerBarText').textContent = '?';
         document.getElementById('defenderBarText').textContent = '?';
         document.getElementById('attackerTotalLabel').textContent = '?';
         document.getElementById('defenderTotalLabel').textContent = '?';
-        
+
+        initParticleCanvas();
+        const ctx = particleCtx;
+        const canvas = particleCanvas;
+        if (ctx && canvas) {
+            ctx.fillStyle = 'rgba(10, 10, 15, 1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(30, 20, 15, 0.5)';
+            ctx.fillRect(0, canvas.height - 10, canvas.width, 10);
+            ctx.fillStyle = '#5a4a3a';
+            ctx.font = '16px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('⚔️ 等待出征...', canvas.width / 2, canvas.height / 2);
+        }
         document.getElementById('battleModal').classList.add('active');
     }
 
-    // ===== 关闭弹窗 =====
     function closeBattleModal() {
-        if (battleTimer) {
-            clearInterval(battleTimer);
-            battleTimer = null;
-        }
+        if (battleTimer) { clearInterval(battleTimer); battleTimer = null; }
+        if (particleAnimId) { cancelAnimationFrame(particleAnimId); particleAnimId = null; }
+        particles = [];
+        particleRunning = false;
         document.getElementById('battleModal').classList.remove('active');
         battleTarget = null;
         battleData = null;
         battleStep = 0;
     }
 
-    // ===== 🎬 开始战斗（带动画） =====
     async function startBattle() {
-        if (!battleTarget) return;
-        if (document.querySelector('.btn-attack').disabled) return;
+        if (!battleTarget || document.querySelector('#battleModal .btn-attack').disabled) return;
 
-        document.querySelector('.btn-attack').disabled = true;
-        document.querySelector('.btn-attack').textContent = '⏳ 战斗中...';
+        document.querySelector('#battleModal .btn-attack').disabled = true;
+        document.querySelector('#battleModal .btn-attack').textContent = '⏳ 战斗中...';
         document.getElementById('battleStatus').textContent = '⏳ 战斗进行中...';
         document.getElementById('battleLogArea').innerHTML = '';
         document.getElementById('battleResult').className = 'battle-result-area';
         document.getElementById('battleResult').textContent = '';
         document.getElementById('battleButtons').style.display = 'flex';
         document.getElementById('battleCloseBtn').style.display = 'none';
+        particles = [];
+        particleRunning = false;
+        if (particleAnimId) { cancelAnimationFrame(particleAnimId); particleAnimId = null; }
 
         try {
             const res = await fetch('/api/battle', {
@@ -943,68 +1420,53 @@
 
             if (!battleData.success) {
                 document.getElementById('battleLogArea').innerHTML = `<div style="color:#ff6b6b;">❌ ${battleData.msg}</div>`;
-                document.querySelector('.btn-attack').disabled = false;
-                document.querySelector('.btn-attack').textContent = '⚔️ 进攻！';
+                document.querySelector('#battleModal .btn-attack').disabled = false;
+                document.querySelector('#battleModal .btn-attack').textContent = '⚔️ 进攻！';
                 return;
             }
 
-            // 初始化兵力条
             const aTotal = battleData.initialAttacker.infantry + battleData.initialAttacker.cavalry + battleData.initialAttacker.archer;
             const dTotal = battleData.initialDefender.infantry + battleData.initialDefender.cavalry + battleData.initialDefender.archer;
             document.getElementById('attackerTotalLabel').textContent = aTotal;
             document.getElementById('defenderTotalLabel').textContent = dTotal;
             updateBars(aTotal, dTotal, aTotal, dTotal);
-
-            // 开始逐步播放战报
             battleStep = 0;
-            playNextLog();
-
+            playNextLogWithParticles();
         } catch (e) {
             document.getElementById('battleLogArea').innerHTML = `<div style="color:#ff6b6b;">❌ 战斗请求失败</div>`;
-            document.querySelector('.btn-attack').disabled = false;
-            document.querySelector('.btn-attack').textContent = '⚔️ 进攻！';
+            document.querySelector('#battleModal .btn-attack').disabled = false;
+            document.querySelector('#battleModal .btn-attack').textContent = '⚔️ 进攻！';
             showMsg('❌ 战斗请求失败', 'error');
         }
     }
 
-    // ===== 逐步播放战报 =====
-    function playNextLog() {
+    function playNextLogWithParticles() {
         if (!battleData) return;
-
         const logs = battleData.battleLog || [];
         const details = battleData.roundDetails || [];
 
         if (battleStep === 0) {
-            // 显示"双方列阵"
+            triggerExplosion();
             const logArea = document.getElementById('battleLogArea');
-            logArea.innerHTML = `
-                <div class="log-entry" style="opacity:1;">
-                    <span class="info">⚔️ 双方列阵，战斗开始！</span>
-                </div>
-            `;
+            logArea.innerHTML = `<div class="log-entry" style="opacity:1;"><span class="info">⚔️ 双方列阵，战斗开始！</span></div>`;
             battleStep++;
-            battleTimer = setTimeout(playNextLog, 600);
+            battleTimer = setTimeout(playNextLogWithParticles, 1000);
             return;
         }
 
         if (battleStep <= logs.length) {
+            triggerExplosion();
             const idx = battleStep - 1;
             const logText = logs[idx] || '';
             const detail = details[idx] || null;
-
             const logArea = document.getElementById('battleLogArea');
             const entry = document.createElement('div');
             entry.className = 'log-entry';
-            
-            // 美化日志
-            let html = logText
-                .replace(/攻击方/g, '<span class="highlight-a">攻击方</span>')
-                .replace(/防守方/g, '<span class="highlight-d">防守方</span>');
+            let html = logText.replace(/攻击方/g, '<span class="highlight-a">攻击方</span>').replace(/防守方/g, '<span class="highlight-d">防守方</span>');
             entry.innerHTML = html;
             logArea.appendChild(entry);
             logArea.scrollTop = logArea.scrollHeight;
 
-            // 更新兵力条
             if (detail) {
                 const aTotal = battleData.initialAttacker.infantry + battleData.initialAttacker.cavalry + battleData.initialAttacker.archer;
                 const dTotal = battleData.initialDefender.infantry + battleData.initialDefender.cavalry + battleData.initialDefender.archer;
@@ -1014,16 +1476,14 @@
                 document.getElementById('attackerTotalLabel').textContent = aRemain;
                 document.getElementById('defenderTotalLabel').textContent = dRemain;
             }
-
             battleStep++;
-            battleTimer = setTimeout(playNextLog, 800);
+            battleTimer = setTimeout(playNextLogWithParticles, 1200);
             return;
         }
 
-        // 战斗结束，显示结果
-        const logArea = document.getElementById('battleLogArea');
+        for (let i = 0; i < 3; i++) setTimeout(() => triggerExplosion(), i * 300);
+
         const resultEl = document.getElementById('battleResult');
-        
         if (battleData.attackerWin) {
             resultEl.className = 'battle-result-area victory';
             resultEl.innerHTML = `🎉 ${battleData.msg}`;
@@ -1034,7 +1494,6 @@
             document.getElementById('battleStatus').textContent = '💀 战败...';
         }
 
-        // 最终兵力
         const aFinal = battleData.attackerRemain.infantry + battleData.attackerRemain.cavalry + battleData.attackerRemain.archer;
         const dFinal = battleData.defenderRemain.infantry + battleData.defenderRemain.cavalry + battleData.defenderRemain.archer;
         const aTotal = battleData.initialAttacker.infantry + battleData.initialAttacker.cavalry + battleData.initialAttacker.archer;
@@ -1045,25 +1504,24 @@
 
         document.getElementById('battleButtons').style.display = 'none';
         document.getElementById('battleCloseBtn').style.display = 'flex';
-        document.querySelector('.btn-attack').disabled = false;
-        document.querySelector('.btn-attack').textContent = '⚔️ 进攻！';
-
-        // 刷新页面数据
+        document.querySelector('#battleModal .btn-attack').disabled = false;
+        document.querySelector('#battleModal .btn-attack').textContent = '⚔️ 进攻！';
+        setTimeout(() => { if (particleRunning) {} }, 2000);
         loadProfile(true);
     }
 
-    // ===== 更新兵力条 =====
     function updateBars(aTotal, dTotal, aCurrent, dCurrent) {
         const aPercent = aTotal > 0 ? Math.max(0, (aCurrent / aTotal) * 100) : 0;
         const dPercent = dTotal > 0 ? Math.max(0, (dCurrent / dTotal) * 100) : 0;
-
         document.getElementById('attackerBar').style.width = aPercent + '%';
         document.getElementById('defenderBar').style.width = dPercent + '%';
         document.getElementById('attackerBarText').textContent = Math.round(aPercent) + '%';
         document.getElementById('defenderBarText').textContent = Math.round(dPercent) + '%';
     }
 
-    // ===== 移动请求 =====
+    // ============================================================
+    // ===== 移动 =====
+    // ============================================================
     async function moveTo(x, y) {
         try {
             const res = await fetch('/api/move', {
@@ -1073,6 +1531,9 @@
             });
             const data = await res.json();
             if (data.success) {
+                if (data.cityCaptured) {
+                    showMsg(`🏰 占领了 ${data.cityCaptured}！`, 'success');
+                }
                 loadProfile(true);
             } else {
                 showMsg('❌ ' + data.msg, 'error');
@@ -1082,7 +1543,9 @@
         }
     }
 
-    // ===== 征兵 =====
+    // ============================================================
+    // ===== 征兵 / 生产 =====
+    // ============================================================
     async function recruit(type) {
         try {
             const res = await fetch('/api/recruit', {
@@ -1107,7 +1570,6 @@
         }
     }
 
-    // ===== 生产 =====
     async function produce(type) {
         const names = { food: '粮食', wood: '木材', iron: '铁矿' };
         try {
@@ -1128,33 +1590,177 @@
         }
     }
 
-    // ===== 排行榜 =====
+    // ============================================================
+    // ===== 🤝 联盟系统 =====
+    // ============================================================
+    function loadAlliances() {
+        const container = document.getElementById('allianceList');
+        const allies = window._allies || [];
+        if (allies.length === 0) {
+            container.innerHTML = '<div class="alliance-empty">暂无盟友，去结交诸侯吧！</div>';
+            return;
+        }
+        let html = '';
+        allies.forEach(ally => {
+            html += `<span class="alliance-item">🤝 <span class="ally-name">${ally}</span></span>`;
+        });
+        container.innerHTML = html;
+    }
+
+    async function requestAlliance() {
+        const input = document.getElementById('allianceInput');
+        const target = input.value.trim();
+        if (!target) {
+            showMsg('请输入对方主公名', 'error');
+            return;
+        }
+        if (target === document.getElementById('username').textContent) {
+            showMsg('不能和自己结盟！', 'error');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/alliance/request', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ targetUsername: target })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showMsg(`✅ ${data.msg}`, 'success');
+                input.value = '';
+                loadProfile(false);
+            } else {
+                showMsg('❌ ' + data.msg, 'error');
+            }
+        } catch (e) {
+            showMsg('❌ 结盟请求失败', 'error');
+        }
+    }
+
+    async function breakAlliance() {
+        const input = document.getElementById('allianceInput');
+        const target = input.value.trim();
+        if (!target) {
+            showMsg('请输入要解除的盟友名', 'error');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/alliance/break', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ targetUsername: target })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showMsg(`✅ ${data.msg}`, 'success');
+                input.value = '';
+                loadProfile(false);
+            } else {
+                showMsg('❌ ' + data.msg, 'error');
+            }
+        } catch (e) {
+            showMsg('❌ 解除联盟失败', 'error');
+        }
+    }
+
+    // ============================================================
+    // ===== 🏪 商店系统 =====
+    // ============================================================
+    async function loadShop() {
+        try {
+            const res = await fetch('/api/shop');
+            const data = await res.json();
+            if (!data.success) {
+                document.getElementById('shopItems').innerHTML = '<div style="color:#5a4a3a;text-align:center;padding:10px;width:100%;">❌ 加载失败</div>';
+                return;
+            }
+            const items = data.data;
+            const container = document.getElementById('shopItems');
+            let html = '';
+            items.forEach(item => {
+                html += `
+                    <div class="shop-item">
+                        <div class="icon">${item.icon}</div>
+                        <div class="name">${item.name}</div>
+                        <div class="desc">${item.desc}</div>
+                        <div class="cost">🌾${item.cost.food} ⛏️${item.cost.iron}</div>
+                        <button onclick="buyItem('${item.id}')">购买</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        } catch (e) {
+            document.getElementById('shopItems').innerHTML = '<div style="color:#5a4a3a;text-align:center;padding:10px;width:100%;">❌ 加载失败</div>';
+        }
+    }
+
+    async function buyItem(itemId) {
+        try {
+            const res = await fetch('/api/shop/buy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ itemId })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showMsg(`✅ ${data.msg}`, 'success');
+                loadProfile(false);
+            } else {
+                showMsg('❌ ' + data.msg, 'error');
+            }
+        } catch (e) {
+            showMsg('❌ 购买失败', 'error');
+        }
+    }
+
+    // 侦查令使用
+    async function useScout() {
+        const target = prompt('请输入要侦查的玩家主公名：');
+        if (!target) return;
+        try {
+            const res = await fetch('/api/shop/scout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ targetUsername: target })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showMsg(`🔍 ${data.msg}`, 'success');
+                loadProfile(false);
+            } else {
+                showMsg('❌ ' + data.msg, 'error');
+            }
+        } catch (e) {
+            showMsg('❌ 侦查失败', 'error');
+        }
+    }
+
+    // ============================================================
+    // ===== 排行榜 / 聊天 =====
+    // ============================================================
     async function loadRanking() {
         try {
             const res = await fetch('/api/ranking');
             const data = await res.json();
             if (!data.success) return;
-
             const list = data.data;
             const currentUser = document.getElementById('username').textContent;
             const container = document.getElementById('rankItems');
-
             if (!list || list.length === 0) {
                 container.innerHTML = '<div class="rank-empty">暂无诸侯</div>';
                 return;
             }
-
             container.innerHTML = '';
             list.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.className = 'rank-item';
                 if (item.username === currentUser) div.classList.add('me');
-
                 let posClass = '';
                 if (index === 0) posClass = 'gold';
                 else if (index === 1) posClass = 'silver';
                 else if (index === 2) posClass = 'bronze';
-
                 div.innerHTML = `
                     <span class="pos ${posClass}">#${index + 1}</span>
                     <span class="tribe">${item.tribeName}</span>
@@ -1168,22 +1774,18 @@
         }
     }
 
-    // ===== 聊天 =====
     async function loadChat() {
         try {
             const res = await fetch('/api/chat');
             const data = await res.json();
             if (!data.success) return;
-
             const messages = data.data;
             const container = document.getElementById('chatContainer');
             const currentUser = document.getElementById('username').textContent;
-
             if (!messages || messages.length === 0) {
                 container.innerHTML = '<div style="color:#5a4a3a;text-align:center;padding:10px;">暂无消息，说点什么吧</div>';
                 return;
             }
-
             let html = '';
             messages.forEach(msg => {
                 const isMe = msg.username === currentUser;
@@ -1199,9 +1801,7 @@
             });
             container.innerHTML = html;
             container.scrollTop = container.scrollHeight;
-        } catch (e) {
-            console.log('加载聊天失败');
-        }
+        } catch (e) { console.log('加载聊天失败'); }
     }
 
     function escapeHtml(text) {
@@ -1213,11 +1813,7 @@
     async function sendChat() {
         const input = document.getElementById('chatInput');
         const content = input.value.trim();
-        if (!content) {
-            showMsg('请输入消息内容', 'error');
-            return;
-        }
-
+        if (!content) { showMsg('请输入消息内容', 'error'); return; }
         try {
             const res = await fetch('/api/chat', {
                 method: 'POST',
@@ -1237,7 +1833,9 @@
         }
     }
 
+    // ============================================================
     // ===== 加载资料 =====
+    // ============================================================
     async function loadProfile(showLoadMsg = true) {
         try {
             const res = await fetch('/api/profile');
@@ -1256,11 +1854,21 @@
             document.getElementById('castleLevel').textContent = p.buildings.mainCastle;
             document.getElementById('farmLevel').textContent = p.buildings.farm;
             document.getElementById('barracksLevel').textContent = p.buildings.barracks;
-            
             document.getElementById('infantry').textContent = p.army?.infantry || 0;
             document.getElementById('cavalry').textContent = p.army?.cavalry || 0;
             document.getElementById('archer').textContent = p.army?.archer || 0;
             
+            // ⭐ 显示武将信息
+            if (p.general) {
+                document.getElementById('generalName').textContent = `⚔️ ${p.general.name}`;
+                document.getElementById('generalForce').textContent = p.general.force;
+                document.getElementById('generalIntelligence').textContent = p.general.intelligence;
+                document.getElementById('generalLeadership').textContent = p.general.leadership;
+            }
+            
+            // 保存盟友数据
+            window._allies = p.allies || [];
+
             const bonusArea = document.getElementById('bonusArea');
             if (data.bonus && (data.bonus.food > 0 || data.bonus.wood > 0 || data.bonus.iron > 0)) {
                 bonusArea.className = 'bonus-box';
@@ -1271,13 +1879,14 @@
             }
 
             if (p.position) {
-                renderMap(p.position.x, p.position.y, data.allPlayers);
+                renderMap(p.position.x, p.position.y, data.allPlayers, data.cities, data.terrain);
                 document.getElementById('positionInfo').textContent = `📍 当前位置：(${p.position.x}, ${p.position.y})`;
             }
 
             loadRanking();
+            loadShop();
             loadChat();
-
+            loadAlliances();
             if (showLoadMsg) showMsg('📊 数据已更新', 'success');
         } catch (e) {
             showMsg('❌ 连接服务器失败', 'error');
