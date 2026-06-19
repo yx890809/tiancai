@@ -47,9 +47,9 @@
       "password": "$2a$10$.ze6z61E/YIMRlS7ho89o.ZY4uJGM.RbgDsd3B.KB6DYUqIJ9xqhW",
       "tribeName": "斗罗大陆",
       "resources": {
-        "food": 312,
-        "wood": 313,
-        "iron": 28
+        "food": 320,
+        "wood": 317,
+        "iron": 32
       },
       "buildings": {
         "mainCastle": 1,
@@ -61,7 +61,7 @@
         "y": 6
       },
       "createdAt": "2026-06-18T11:18:57.170Z",
-      "lastLogin": "2026-06-19T07:38:59.694Z",
+      "lastLogin": "2026-06-19T07:47:59.689Z",
       "army": {
         "infantry": 6,
         "cavalry": 2,
